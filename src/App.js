@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Navbar from './components/Navbar/navbar.jsx'
+import { BrowserRouter as Router, Routes, Route, Navigate }
+  from 'react-router-dom'
+import Menu from './pages/menu.jsx'
+import Login from './pages/login.jsx'
+import Notification from './pages/notifications.jsx'
+import Calendar from './pages/calendar.jsx'
+import Home from './pages/home.jsx'
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {isLoggedIn === false ?
+        <>
+          <Login loggedInChanger={setIsLoggedIn}/>
+        </> :
+        <>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Navigate replace to='/home' />} />
+              <Route path='/home' element={<Home />} />
+              <Route path='/menu' element={<Menu />} />
+              <Route path='/notifications' element={<Notification />} />
+              <Route path='/calendar' element={<Calendar />} />
+            </Routes>
+          </Router>
+        </>}
+    </>
+  )
 }
 
-export default App;
+export default App
