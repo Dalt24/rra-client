@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate }
   from 'react-router-dom'
 import Menu from './pages/menu.jsx'
 import Login from './pages/login.jsx'
+import Register from './pages/register.jsx'
 import Notification from './pages/notifications.jsx'
 import Calendar from './pages/calendar.jsx'
 import Home from './pages/home.jsx'
@@ -11,14 +12,24 @@ import Home from './pages/home.jsx'
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [isRegistered, setIsRegistered] = useState(true);
 
   return (
     <>
-      {isLoggedIn === false ?
-        <>
-          <Login loggedInChanger={setIsLoggedIn}/>
-        </> :
+
+      { // Loads Register Page, triggered when user clicks 'sign up' button on login page
+        (isRegistered === false) && <Register registeredChanger={setIsRegistered}/> 
+      }
+
+      { // default Login Screen, Updates if the user is a valid user
+        (isRegistered === true) &&
+        (isLoggedIn === false) ?
+        <> 
+          <Login loggedInChanger={setIsLoggedIn}
+            registeredChanger={setIsRegistered}
+            />
+          </> :
+          (isRegistered === true) && // default Home Screen, loads when user is Registered && Logged in Succesfully
         <>
           <Router>
             <Navbar />
@@ -30,7 +41,9 @@ function App() {
               <Route path='/calendar' element={<Calendar />} />
             </Routes>
           </Router>
-        </>}
+          </>
+      }
+
     </>
   )
 }
