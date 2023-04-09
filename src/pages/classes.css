@@ -48,6 +48,6 @@ form button {
   background-color: rgb(201, 30, 30);
 }
 
-#passwordInput {
-  background-color: red;
+.passwordInput {
+  display: none;
 }

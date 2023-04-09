@@ -21,7 +21,6 @@ const Register = ({registeredChanger }) => {
         isMatchingPass === false && (alert("Passwords Don't Match"))
 
 
-
         isValidEmail && isValidPassOne && isValidPassTwo && isMatchingPass ? <>{registeredChanger(true)}</> : <>{registeredChanger(false) }</>
         
 
