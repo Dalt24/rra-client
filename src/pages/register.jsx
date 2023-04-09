@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { validatePassword, comparePassword } from '../functions/security/validatePassword';
 import { validateEmail } from '../functions/security/validateEmail';
 import './classes.css';
+import axios from 'axios';
 
 const Register = ({registeredChanger }) => {
     const [userEmail, setUserEmail] = useState("");
     const [passWordOne, setPassWordOne] = useState("");
     const [passWordOneConfirmation, setPassWordOneConfirmation] = useState("");
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
     
   
     const handleRegister = () => {
@@ -15,13 +19,22 @@ const Register = ({registeredChanger }) => {
         const isValidPassTwo = validatePassword(passWordOneConfirmation)    
         const isMatchingPass = comparePassword(passWordOne, passWordOneConfirmation)
 
-        isValidEmail === false && (alert('Invalid Email'))
-        isValidPassOne === false && (alert('Invalid Password'))
-        isValidPassTwo === false && (alert('Invalid Conformation Password'))
-        isMatchingPass === false && (alert("Passwords Don't Match"))
+        // isValidEmail === false && (alert('Invalid Email'))
+        // isValidPassOne === false && (alert('Invalid Password'))
+        // isValidPassTwo === false && (alert('Invalid Conformation Password'))
+        // isMatchingPass === false && (alert("Passwords Don't Match"))
 
-
-        isValidEmail && isValidPassOne && isValidPassTwo && isMatchingPass ? <>{registeredChanger(true)}</> : <>{registeredChanger(false) }</>
+        const user = {
+            firstName: firstName,
+            lastName: lastName,
+            emailAddress: userEmail,
+            phoneNumber: phoneNumber,
+            userPassword: passWordOne,
+            isAdmin: "false",
+            isTherapist: "false"
+        }
+        isValidEmail && isValidPassOne && isValidPassTwo && isMatchingPass && phoneNumber && firstName && lastName ?(
+            axios.post(`https://localhost:7202/api/User`, user).then(registeredChanger(true))):(registeredChanger(false))
         
 
     // axios logic, check if userEmail is in database && verify password
@@ -38,6 +51,10 @@ const Register = ({registeredChanger }) => {
   return (
     <div>
       <form className="form">
+        <input type="text" id="firstNameInput" onChange={e => setFirstName(e.target.value)} placeholder="First Name" />
+        <input type="text" id="lastNameInput" onChange={e => setLastName(e.target.value)} placeholder="Last Name" />
+        <input type="text" id="phoneNumberInput" onChange={e => setPhoneNumber(e.target.value)}placeholder="Phone Number xxx-xxx-xxxx" />
+              
         <input id="emailInput" onChange={e =>  setUserEmail(e.target.value) } type="text" placeholder="Email" />
         <input type="password" onChange={e =>  setPassWordOne(e.target.value) } email="firstPass" placeholder="Password" />
         <input  type="password" onChange={e => setPassWordOneConfirmation(e.target.value)} email="secondPass" placeholder="Confirm Password" />

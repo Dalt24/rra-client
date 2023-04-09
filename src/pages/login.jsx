@@ -17,13 +17,16 @@ const Login = ({ loggedInChanger, registeredChanger }) => {
 
   
   const handleLogin = () => {
+    
     // axios logic, check if userEmail is in database && verify password
     const currUser = data.find((user) => user.emailAddress === userEmail)
-    // if login credentials don't match DB set loggedInChanger(false)
     // if login is successful set loggedInChanger(true)
-    if (currUser !== null && currUser !== undefined)
-    {
-      if (currUser.userPassword === passWordOne)loggedInChanger(true)
+    if (currUser !== null && currUser !== undefined){
+      if (currUser.userPassword === passWordOne) {
+        loggedInChanger(true)
+        // need logic to change display what's display if they're a user / admin / therapist
+      
+      }// if login credentials don't match DB set loggedInChanger(false)
       else loggedInChanger(false)
     }
     // set what user is Logged In to pull the respective credentials & appointment data
