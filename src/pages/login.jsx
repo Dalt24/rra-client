@@ -20,16 +20,16 @@ const Login = ({ loggedInChanger, registeredChanger }) => {
     
     // axios logic, check if userEmail is in database && verify password
     const currUser = data.find((user) => user.emailAddress === userEmail)
-    // if login is successful set loggedInChanger(true)
     if (currUser !== null && currUser !== undefined){
+      // need logic to change display what's display if they're a user / admin / therapist
       if (currUser.userPassword === passWordOne) {
         loggedInChanger(true)
-        // need logic to change display what's display if they're a user / admin / therapist
-      
-      }// if login credentials don't match DB set loggedInChanger(false)
+      }// Need a failed to login modal / temp screen
       else loggedInChanger(false)
     }
     // set what user is Logged In to pull the respective credentials & appointment data
+    // global state with logged in Users Data so we can match the userID to other 'data'
+    
   };
 
 

@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { validatePassword, comparePassword } from '../functions/security/validatePassword';
 import { validateEmail } from '../functions/security/validateEmail';
 import './classes.css';
-import axios from 'axios';
 
-const Register = ({registeredChanger }) => {
+const Register = ({registeredChanger}) => {
     const [userEmail, setUserEmail] = useState("");
     const [passWordOne, setPassWordOne] = useState("");
     const [passWordOneConfirmation, setPassWordOneConfirmation] = useState("");
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
+    const [data, setData] = useState();
     
+      useEffect(() => {
+    axios.get(`https://localhost:7202/api/User`).then((response) => {
+      setData(response.data);
+    });
+      }, []);
   
     const handleRegister = () => {
-        const isValidEmail = validateEmail(userEmail)
-        const isValidPassOne = validatePassword(passWordOne)    
-        const isValidPassTwo = validatePassword(passWordOneConfirmation)    
-        const isMatchingPass = comparePassword(passWordOne, passWordOneConfirmation)
-
+      const isValidEmail = validateEmail(userEmail)
+      const isValidPassOne = validatePassword(passWordOne)    
+      const isValidPassTwo = validatePassword(passWordOneConfirmation)    
+      const isMatchingPass = comparePassword(passWordOne, passWordOneConfirmation)
+      
+      const isDuplicateEmail = data.find((user) => user.emailAddress === userEmail)
         // isValidEmail === false && (alert('Invalid Email'))
         // isValidPassOne === false && (alert('Invalid Password'))
         // isValidPassTwo === false && (alert('Invalid Conformation Password'))
         // isMatchingPass === false && (alert("Passwords Don't Match"))
+
 
         const user = {
             firstName: firstName,
@@ -32,19 +40,18 @@ const Register = ({registeredChanger }) => {
             userPassword: passWordOne,
             isAdmin: "false",
             isTherapist: "false"
-        }
+      }
+      
+      if (isDuplicateEmail === undefined)
+      {
         isValidEmail && isValidPassOne && isValidPassTwo && isMatchingPass && phoneNumber && firstName && lastName ?(
             axios.post(`https://localhost:7202/api/User`, user).then(registeredChanger(true))):(registeredChanger(false))
+      }
         
-
-    // axios logic, check if userEmail is in database && verify password
-
-    // if login credentials don't match DB set loggedInChanger(false)
-    // if login is successful set loggedInChanger(true)
-    
-    // set what user is Logged In to pull the respective credentials & appointment data
-        // (userEmail === "dcw.dalton@gmail.com" && comparePassword(passWordOne, passWordOneConfirmation) === true) ? <>{registeredChanger(true) +  alert('Registered Succesfully, Return to Login Page')}</> : registeredChanger(false)
-    
+        //need to check if email already exists in the system
+        
+        // if login credentials don't match DB set loggedInChanger(false)
+        // if login is successful set loggedInChanger(true)    
   };
 
 
