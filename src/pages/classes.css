@@ -51,3 +51,9 @@ form button {
 .passwordInput {
   display: none;
 }
+
+.calendarWidth {
+  max-width: 70%;
+  border: 5px solid;
+  justify-content: center !important;
+}

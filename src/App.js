@@ -13,7 +13,7 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(true);
-
+  const [currentUser, setCurrentUser] = useState()
   return (
     <>
 
@@ -25,8 +25,10 @@ function App() {
         (isRegistered === true) &&
         (isLoggedIn === false) ?
         <> 
-          <Login loggedInChanger={setIsLoggedIn}
-            registeredChanger={setIsRegistered}
+            <Login
+              setCurrentUser={setCurrentUser}
+              loggedInChanger={setIsLoggedIn}
+              registeredChanger={setIsRegistered}
             />
           </> :
           (isRegistered === true) && // default Home Screen, loads when user is Registered && Logged in Succesfully
@@ -35,10 +37,10 @@ function App() {
             <Navbar />
             <Routes>
               <Route path='/' element={<Navigate replace to='/home' />} />
-              <Route path='/home' element={<Home />} />
+              <Route path='/home' element={<Home currentUser={currentUser}/>} />
               <Route path='/menu' element={<Menu />} />
               <Route path='/notifications' element={<Notification />} />
-              <Route path='/calendar' element={<Calendar />} />
+              <Route path='/calendar' element={<Calendar currentUser={currentUser} />} />
             </Routes>
           </Router>
           </>

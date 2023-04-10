@@ -1,13 +1,17 @@
 import React from "react";
-  
-const Calendar = () => {
+
+
+
+const Calendar = (currentUser) => {
+
+  const currUser = currentUser.currentUser
+
   return (
     <div>
-      <h1>
-        Calendar Placeholder
-      </h1>
-    </div>
+      {console.log(currUser)}
+
+    </div >
   );
 };
-  
+
 export default Calendar;
