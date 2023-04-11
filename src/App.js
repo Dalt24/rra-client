@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import Navbar from './components/Navbar/navbar.jsx'
-import { BrowserRouter as Router, Routes, Route, Navigate }
-  from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate }from 'react-router-dom'
 import Menu from './pages/menu.jsx'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
 import Notification from './pages/notifications.jsx'
-import Calendar from './pages/calendar.jsx'
+import CalendarPage from './pages/calendar.jsx'
 import Home from './pages/home.jsx'
 
 function App() {
@@ -40,7 +39,7 @@ function App() {
               <Route path='/home' element={<Home currentUser={currentUser}/>} />
               <Route path='/menu' element={<Menu />} />
               <Route path='/notifications' element={<Notification />} />
-              <Route path='/calendar' element={<Calendar currentUser={currentUser} />} />
+              <Route path='/calendar' element={<CalendarPage currentUser={currentUser} />} />
             </Routes>
           </Router>
           </>
