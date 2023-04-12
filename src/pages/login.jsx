@@ -8,17 +8,22 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser }) => {
   const [userEmail, setUserEmail] = useState("");
   const [passWordOne, setPassWordOne] = useState("");
   const [data, setData] = useState();
+  const [therapistData, setTherapistData] = useState();
 
   useEffect(() => {
     axios.get(`https://localhost:7202/api/User`).then((response) => {
       setData(response.data);
     });
+    axios.get(`https://localhost:7202/api/Therapist`).then((response) => {
+      setTherapistData(response.data);
+    });
   }, []);
 
-
+  console.log(therapistData)
   const handleLogin = () => {
 
     // axios logic, check if userEmail is in database && verify password
+    console.log(data)
     const currUser = data.find((user) => user.emailAddress === userEmail)
     if (currUser !== null && currUser !== undefined) {
       // need logic to change display what's display if they're a user / admin / therapist

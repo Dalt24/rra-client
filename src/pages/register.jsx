@@ -39,7 +39,7 @@ const Register = ({ registeredChanger }) => {
       phoneNumber: phoneNumber,
       userPassword: passWordOne,
       isAdmin: "false",
-      isTherapist: "false"
+      isTherapist: "false",
     }
 
     if (isDuplicateEmail === undefined) {
