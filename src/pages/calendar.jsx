@@ -8,7 +8,7 @@ import './calendar.css';
 
 const CalendarPage = (currentUser) => {
 
-  // const currUser = currentUser.currentUser
+  const currUser = currentUser.currentUser
   const [data, setData] = useState([]);
   const [date, setDate] = useState(new Date().toISOString());
   const [day, setDay] = useState(moment().format('dddd'));
@@ -29,9 +29,8 @@ const CalendarPage = (currentUser) => {
       // If one interval is already selected, check if the clicked interval is the next 30-minute interval
       const selectedInterval = selectedIntervals[0];
       const nextInterval = moment(selectedInterval, 'h:mm A').add(30, 'minutes').format('h:mm A');
-      const prevInterval = moment(selectedInterval, 'h:mm A').subtract(30, 'minutes').format('h:mm A');
 
-      if (interval === nextInterval || interval === prevInterval) {
+      if (interval === nextInterval) {
         setSelectedIntervals([selectedInterval, interval]);
       } else {
         setSelectedIntervals([interval]);
@@ -43,8 +42,22 @@ const CalendarPage = (currentUser) => {
   }
 
   function handleSubmit() {
-    console.log('Therapist:', therapist);
-    console.log('Selected intervals:', selectedIntervals);
+    // console.log('Selected Intervals:', selectedIntervals);
+    // let startDate = moment(date);
+    // let endDate = startDate.add(moment(selectedIntervals[0]))
+    // console.log(endDate)
+    // console.log(moment(date) + (moment(selectedIntervals[0])))
+    const startDate = moment(date);
+    const startTime = moment(selectedIntervals[0], 'h:mm A');
+
+    const appointmentDate = startDate
+    .hours(startTime.hours())
+    .minutes(startTime.minutes());
+    
+    const endAptDate = moment(appointmentDate).add(30*selectedIntervals.length, 'minutes')
+    
+      console.log(appointmentDate)
+      console.log(endAptDate)
   }
 
   useEffect(() => {
@@ -86,11 +99,10 @@ const CalendarPage = (currentUser) => {
 
           return (
             <div>
-              {console.log(therapist)}
               {timeIntervals.map((time) => (
                 <button
                   onClick={() => handleIntervalClick(time)}
-                  style={{ background: selectedIntervals.includes(time) ? 'green' : 'white' }}
+                  style={{ background: selectedIntervals.includes(time) ? 'teal' : 'white' }}
                 >
                   {time}
                 </button>
