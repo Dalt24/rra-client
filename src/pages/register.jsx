@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import { validatePassword, comparePassword } from '../functions/security/validatePassword';
 import { validateEmail } from '../functions/security/validateEmail';
 import './classes.css';
 
-const Register = ({ registeredChanger }) => {
+const Register = ({ registeredChanger, data }) => {
   const [userEmail, setUserEmail] = useState("");
   const [passWordOne, setPassWordOne] = useState("");
   const [passWordOneConfirmation, setPassWordOneConfirmation] = useState("");
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    axios.get(`https://localhost:7202/api/User`).then((response) => {
-      setData(response.data);
-    });
-  }, []);
 
   const handleRegister = () => {
     const isValidEmail = validateEmail(userEmail)

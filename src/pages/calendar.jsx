@@ -1,33 +1,19 @@
-import { React, useEffect, useState } from "react";
+import { React,  useState} from "react";
 import axios from 'axios';
 import Calendar from 'react-calendar'
 import moment from "moment/moment";
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+import TherapistCalendar from "./Calendar/therapistCalendar";
 
 
-const CalendarPage = (currentUser) => {
-  const currUser = currentUser.currentUser
-
-  var test = JSON.parse('{"Monday":[{"start":"09:00 AM", "end":"12:00 PM"},{"start":"01:00 PM", "end":"05:00 PM"}],"Tuesday":[{"start":"01:00 PM", "end":"05:00 PM"}],"Wednesday":[],"Thursday":[{"start":"09:00 AM", "end":"12:00 PM"}],"Friday":[{"start":"01:00 PM", "end":"05:00 PM"}],"Saturday":[],"Sunday":[]}')
+const CalendarPage = ({ currentUser, appointmentData, therapistData }) => {
+  // console.log(currentUser)
+  // const apt = appointmentData.find((a) => a.a)
+  var test = JSON.parse('{"Monday":[{"start":"08:30 AM","end":"09:00 AM"},{"start":"09:00 AM","end":"09:30 AM"}],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[],"Saturday":[],"Sunday":[]}')
   var test2 = JSON.stringify(test)
-  useEffect(() => {
-    if (currUser.isAdmin === "false" && currUser.isTherapist === "false") {
-      axios.get(`https://localhost:7202/api/Therapist`).then((response) => {
-        setData(response.data);
-      });
-    }
-    if (currUser.isAdmin === "false" && currUser.isTherapist === "false") {
 
 
-      axios.get(`https://localhost:7202/api/Appointment`).then((response) => {
-        setAppointmentData(response.data);
-      });
-    }
-  }, [currUser]);
-
-  const [data, setData] = useState([]);
-  const [appointmentData, setAppointmentData] = useState([])
   const [date, setDate] = useState(new Date().toISOString());
   const [day, setDay] = useState(moment().format('dddd'));
   const [a, setA] = useState();
@@ -77,19 +63,20 @@ const CalendarPage = (currentUser) => {
     // console.log(endAptDate._d)
 
     var address = "1175 13th Street East, 1212A"
-    const therapistInfo = (data.find((data) => data.therapistID === therapist))
+    const therapistInfo = (therapistData.find((data) => data.therapistID === therapist))
 
     const body = {
-      userID: currUser.userID,
-      firstName: currUser.firstName,
-      lastName: currUser.lastName,
-      emailAddress: currUser.emailAddress,
+      userID: currentUser.userID,
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+      emailAddress: currentUser.emailAddress,
       locationAddress: address,
       therapistFirstName: therapistInfo.firstName,
       therapistLastName: therapistInfo.lastName,
       therapistID: therapistInfo.therapistID,
       appointmentStartDate: appointmentDate._d,
       appointmentEndDate: endAptDate._d,
+      therapyType: ""
     }
     var aaa
     const testDate = appointmentData.find((data) => moment(data.appointmentStartDate)._d.toISOString() === startDate._d.toISOString())
@@ -108,10 +95,10 @@ const CalendarPage = (currentUser) => {
 
   function handleAdmin(){
     const body = {
-      firstName: "Jeff",
-      lastName: "Lucas",
+      firstName: "Test",
+      lastName: "Test",
       availability: test2,
-      emailAddress: "jeff.lucas@gmail.com",
+      emailAddress: "test.test@gmail.com",
       therapistPassword: "TestPass1!",
       isAdmin: "false",
       isTherapist: "true"
@@ -119,25 +106,30 @@ const CalendarPage = (currentUser) => {
     axios.post('https://localhost:7202/api/Therapist', body)
   }
 
-  if (currUser.isAdmin === "false" && currUser.isTherapist === "false") {
+  if (currentUser.isAdmin === "false" && currentUser.isTherapist === "false") {
     return (
       <div>
+        {console.log(therapistData)}
+        <Calendar onChange={onChange} value={date} calendarType="US" />
         <select
           onChange={(e) => {
             setTherapist(e.target.value);
-            setA(JSON.parse((data.find((data) => data.therapistID === e.target.value)).availability));
+            console.log(e.target.value)
+            // console.log(therapist)
+            // console.log(therapistData)
+            setA(JSON.parse(therapistData.find((t) => t.therapistID === therapist).availability))            // setA());
+            console.log(a)
           }}
         >
           <option> -- Select a therapist -- </option>
-          {data.map((therapist) => (
+          {therapistData.map((therapist) => (
             <option value={therapist.therapistID}>
               {therapist.firstName + ' ' + therapist.lastName}
             </option>
           ))}
         </select>
-        <Calendar onChange={onChange} value={date} calendarType="US" />
         <p>Appointments Available on {moment(date).format('MMMM Do YYYY')}</p>
-
+            {/* {console.log(a)} */}
         {a !== undefined &&
           a[day]?.map((c) => {
             const startTime = moment(c.start, 'h:mm A');
@@ -168,7 +160,7 @@ const CalendarPage = (currentUser) => {
         <button onClick={handleSubmit}>Submit</button>
       </div>
     );
-  } else if (currUser.isAdmin === "true") {
+  } else if (currentUser.isAdmin === "true") {
 
 
 
@@ -187,8 +179,8 @@ const CalendarPage = (currentUser) => {
 
     </div>)
   }
-  else if (currUser.isTherapist === "true") {
-    return <div>Therapist</div>
+  else if (currentUser.isTherapist === "true") {
+    return <TherapistCalendar />
   }
 }
 
