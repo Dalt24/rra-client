@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
+const TherapistCalendar = (props) => {
 
-const TherapistCalendar = () => {
-            const [availability, setAvailability] = useState({
-            Monday: [],
-            Tuesday: [],
-            Wednesday: [],
-            Thursday: [],
-            Friday: [],
-            Saturday: [],
-            Sunday: [],
-            });
-    
-    const [aa, setAA] = useState()
-    
+    const therapistInfo = (props.therapistData.find((data) => data.therapistID === props.currentUser.therapistID))
+    const [availability, setAvailability] = useState(JSON.parse(therapistInfo.availability));
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const timeSlots = [
@@ -28,8 +19,6 @@ const TherapistCalendar = () => {
 
     function handleSubmit() {
         console.log(availability)
-        // setAA(JSON.stringify(availability))
-        // console.log(availability)
         const body = {
             firstName: "Therapist",
             lastName: "Therapist",
@@ -39,62 +28,58 @@ const TherapistCalendar = () => {
             isAdmin: "false",
             isTherapist: "true"
         }
-        // console.log(JSON.stringify(availability))
-        // axios.post('https://localhost:7202/api/Therapist', body)
+        axios.put(`https://localhost:7202/api/Therapist/${props.currentUser.therapistID}`, body)
     }
 
-    // I think I'm displaying the wrong availability to the user / storing it to the wrong therapistID,
-    // compare user -> calendar -> dropdown availability to DB
-
-
-
-        const handleTimeSlotSelection = (day, index) => {
-            const [startTime, endTime] = timeSlots.slice(index, index + 2);
-            setAvailability(prevAvailability => ({
-                ...prevAvailability,
-                [day]: [
-                    ...prevAvailability[day],
-                    { start: startTime, end: endTime },
-                ],
-            }));
-        };
-
-        const handleRemoveTimeSlot = (day, index) => {
-            setAvailability(prevAvailability => ({
-                ...prevAvailability,
-                [day]: prevAvailability[day].filter((_, i) => i !== index),
-            }));
-        };
-
-        return (
-            <>
-                {daysOfWeek.map(day => (
-                    <div key={day}>
-                        <h3>{day}</h3>
-                        <div>
-                            {availability[day].length > 0 ? (
-                                availability[day].map(({ start, end }, i) => (
-                                    <div key={i}>
-                                        {start} - {end}
-                                        <button onClick={() => handleRemoveTimeSlot(day, i)}>Remove</button>
-                                    </div>
-                                ))
-                            ) : (
-                                <div>No availability set.</div>
-                            )}
-                        </div>
-                        <select onChange={(e) => handleTimeSlotSelection(day, e.target.selectedIndex)}>
-                            <option value="">Select a time slot...</option>
-                            {timeSlots.map((time, i) => (
-                                <option key={i} value={time}>{time}</option>
-                            ))}
-                        </select>
-                    </div>
-                ))}
-                {availability && <button onClick={handleSubmit}>Submit</button>}
-                
-                <pre>{JSON.stringify(availability)}</pre>
-            </>
-        );
+    const handleTimeSlotSelection = (day, index) => {
+        const startTime = timeSlots[index];
+        const endTime = moment(startTime, 'h:mm A').add(30, 'minutes').format('h:mm A');
+        setAvailability(prevAvailability => ({
+            ...prevAvailability,
+            [day]: [
+                ...prevAvailability[day],
+                { start: startTime, end: endTime },
+            ],
+        }));
     };
+
+    const handleRemoveTimeSlot = (day, index) => {
+        setAvailability(prevAvailability => ({
+            ...prevAvailability,
+            [day]: prevAvailability[day].filter((_, i) => i !== index),
+        }));
+    };
+
+    return (
+        <>
+            {daysOfWeek.map(day => (
+                <div key={day}>
+                    <h3>{day}</h3>
+                    <div>
+                        {availability[day].length > 0 ? (
+                            availability[day].map(({ start, end }, i) => (
+                                <div key={i}>
+                                    {start} - {end}
+                                    <button onClick={() => handleRemoveTimeSlot(day, i)}>Remove</button>
+                                </div>
+                            ))
+                        ) : (
+                            <div>No availability set.</div>
+                        )}
+                    </div>
+                    <select onChange={(e) => handleTimeSlotSelection(day, e.target.value)}>
+                        <option value="">Select a time slot...</option>
+                        {timeSlots.map((time, i) => (
+                            <option key={i} value={i}>{time}</option>
+                        ))}
+                    </select>
+
+                </div>
+            ))}
+            {availability && <button onClick={handleSubmit}>Submit</button>}
+
+            <pre>{JSON.stringify(availability)}</pre>
+        </>
+    );
+};
 export default TherapistCalendar;

@@ -7,7 +7,7 @@ import Menu from './pages/menu.jsx'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
 import Notification from './pages/notifications.jsx'
-import CalendarPage from './pages/calendar.jsx'
+import CalendarPage from './pages/Calendar/calendar.jsx'
 import Home from './pages/Home/home.jsx'
 
 
@@ -24,9 +24,12 @@ function App() {
 
   useEffect(() => {
     axios.get(`https://localhost:7202/api/Therapist`).then((response) => {
+      console.log(response.data)
+
       setTherapistData(response.data);
     });
     axios.get(`https://localhost:7202/api/User`).then((response) => {
+      console.log(response.data)
       setData(response.data);
     });
   }, []);
@@ -47,6 +50,8 @@ function App() {
       });
     }
   }, [currentUser])
+
+  
   return (
     <>
 
