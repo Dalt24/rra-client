@@ -2,8 +2,9 @@ import moment from "moment";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Calendar from 'react-calendar'
-
+import { getApiBaseUrl } from "../../functions/api/getApi";
 const UserCalendar = (props) => {
+
     const [date, setDate] = useState(new Date().toISOString());
     const [day, setDay] = useState(moment().format('dddd'));
     const [a, setA] = useState();
@@ -18,12 +19,12 @@ const UserCalendar = (props) => {
 
     useEffect(() => {
         if (props.currentUser !== null && props.currentUser !== undefined && props.currentUser.isTherapist === "false") {
-            axios.get(`https://localhost:7202/api/Appointment`).then((response) => {
+            axios.get(`${getApiBaseUrl()}/api/Appointment`).then((response) => {
                 setAppointmentData(response.data)
             });
         }
         else if (props.currentUser !== null && props.currentUser !== undefined && props.currentUser.isTherapist === "true") {
-            axios.get(`https://localhost:7202/api/Appointment`).then((response) => {
+            axios.get(`${getApiBaseUrl()}/api/Appointment`).then((response) => {
                 setAppointmentData(response.data)
             });
         }
@@ -86,7 +87,7 @@ const UserCalendar = (props) => {
         catch { }
         // console.log(startDate)
         if (aaa !== startDate._d.toISOString()) {
-            axios.post('https://localhost:7202/api/Appointment', body)
+            axios.post(`${getApiBaseUrl()}/api/Appointment`, body)
         }
         else {
             alert('Appointment Time Already Reserved!')

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-
+import { getApiBaseUrl } from '../../functions/api/getApi';
 const TherapistCalendar = (props) => {
 
     const therapistInfo = (props.therapistData.find((data) => data.therapistID === props.currentUser.therapistID))
@@ -28,7 +28,7 @@ const TherapistCalendar = (props) => {
             isAdmin: "false",
             isTherapist: "true"
         }
-        axios.put(`https://localhost:7202/api/Therapist/${props.currentUser.therapistID}`, body)
+        axios.put(`${getApiBaseUrl()}/api/Therapist/${props.currentUser.therapistID}`, body)
     }
 
     const handleTimeSlotSelection = (day, index) => {

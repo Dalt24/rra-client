@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import axios from 'axios';
 import { validatePassword, comparePassword } from '../functions/security/validatePassword';
 import { validateEmail } from '../functions/security/validateEmail';
+import { getApiBaseUrl } from '../functions/api/getApi';
 import './classes.css';
 
 const Register = ({ registeredChanger, data }) => {
@@ -37,7 +38,7 @@ const Register = ({ registeredChanger, data }) => {
 
     if (isDuplicateEmail === undefined) {
       isValidEmail && isValidPassOne && isValidPassTwo && isMatchingPass && phoneNumber && firstName && lastName ? (
-        axios.post(`https://localhost:7202/api/User`, user).then(registeredChanger(true))) : (registeredChanger(false))
+        axios.post(`${getApiBaseUrl()}/api/User`, user).then(registeredChanger(true))) : (registeredChanger(false))
     }
 
     //need to check if email already exists in the system

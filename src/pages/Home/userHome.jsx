@@ -1,7 +1,7 @@
 import moment from "moment";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { getApiBaseUrl } from "../../functions/api/getApi";
 const UserHome = ({currentUser}) => {
 
   const [futureAppointmentData, setFutureAppointmentData] = useState([])
@@ -9,13 +9,13 @@ const UserHome = ({currentUser}) => {
 
   useEffect(() => {
     if (currentUser !== null && currentUser !== undefined && currentUser.isTherapist === "false") {
-      axios.get(`https://localhost:7202/api/Appointment`).then((response) => {
+      axios.get(`${getApiBaseUrl()}/api/Appointment`).then((response) => {
         setPastAppointmentData(response.data?.filter((data) => data?.userID === currentUser.userID && moment(data?.appointmentStartDate).isBefore(moment())))
         setFutureAppointmentData(response.data?.filter((data) => data?.userID === currentUser.userID && moment(data?.appointmentStartDate).isAfter(moment())))
       });
     }
     else if (currentUser !== null && currentUser !== undefined && currentUser.isTherapist === "true") {
-      axios.get(`https://localhost:7202/api/Appointment`).then((response) => {
+      axios.get(`${getApiBaseUrl()}/api/Appointment`).then((response) => {
         setPastAppointmentData(response.data?.filter((data) => data?.therapistID === currentUser.therapistID && moment(data?.appointmentStartDate).isBefore(moment())))
         setFutureAppointmentData(response.data?.filter((data) => data?.therapistID === currentUser.therapistID && moment(data?.appointmentStartDate).isAfter(moment())))
       });

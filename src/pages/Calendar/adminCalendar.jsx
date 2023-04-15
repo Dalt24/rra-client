@@ -1,7 +1,9 @@
 import axios from "axios";
-
+import { getApiBaseUrl } from "../../functions/api/getApi";
 
 const AdminCalendar = () => {
+
+
     function handleAdmin() {
         const body = {
             firstName: "Jeff",
@@ -12,7 +14,7 @@ const AdminCalendar = () => {
             isAdmin: "false",
             isTherapist: "true"
         }
-        axios.post('https://localhost:7202/api/Therapist', body)
+        axios.post(`${getApiBaseUrl()}/api/Therapist`, body)
     }
 
     return (

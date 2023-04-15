@@ -9,6 +9,7 @@ import Register from './pages/register.jsx'
 import Notification from './pages/notifications.jsx'
 import CalendarPage from './pages/Calendar/calendar.jsx'
 import Home from './pages/Home/home.jsx'
+import { getApiBaseUrl } from './functions/api/getApi.js'
 
 
 function App() {
@@ -23,27 +24,24 @@ function App() {
   const [appointmentData, setAppointmentData] = useState([])
 
   useEffect(() => {
-    axios.get(`https://localhost:7202/api/Therapist`).then((response) => {
-      console.log(response.data)
-
+    axios.get(`${getApiBaseUrl()}/api/Therapist`).then((response) => {
       setTherapistData(response.data);
     });
-    axios.get(`https://localhost:7202/api/User`).then((response) => {
-      console.log(response.data)
+    axios.get(`${getApiBaseUrl()}/api/User`).then((response) => {
       setData(response.data);
     });
   }, []);
 
   useEffect(() => {
     if (currentUser !== null && currentUser !== undefined && currentUser.isTherapist === "false") {
-      axios.get(`https://localhost:7202/api/Appointment`).then((response) => {
+      axios.get(`${getApiBaseUrl()}/api/Appointment`).then((response) => {
         setPastAppointmentData(response.data?.filter((data) => data?.userID === currentUser.userID && moment(data?.appointmentStartDate).isBefore(moment())))
         setFutureAppointmentData(response.data?.filter((data) => data?.userID === currentUser.userID && moment(data?.appointmentStartDate).isAfter(moment())))
         setAppointmentData(response.data)
       });
     }
     else if (currentUser !== null && currentUser !== undefined && currentUser.isTherapist === "true") {
-      axios.get(`https://localhost:7202/api/Appointment`).then((response) => {
+      axios.get(`${getApiBaseUrl()}/api/Appointment`).then((response) => {
         setPastAppointmentData(response.data?.filter((data) => data?.therapistID === currentUser.therapistID && moment(data?.appointmentStartDate).isBefore(moment())))
         setFutureAppointmentData(response.data?.filter((data) => data?.therapistID === currentUser.therapistID && moment(data?.appointmentStartDate).isAfter(moment())))
         setAppointmentData(response.data)
