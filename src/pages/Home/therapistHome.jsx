@@ -27,7 +27,7 @@ const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData
                 <div className="col-md">
                     <h3>Upcoming Appointments</h3>
                     <ul>
-                        {futureAppointmentData.map((appointment) => {
+                        {futureAppointmentData.filter((appointment) => appointment.isCanceled !== "true").map((appointment) => {
                             const appointmentStartDate = moment(appointment.appointmentStartDate);
                             const isToday = appointmentStartDate.isSame(moment(), 'day');
                             return (

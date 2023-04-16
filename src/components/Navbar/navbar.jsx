@@ -27,7 +27,7 @@ function CustomLink({ to, children, ...props }) {
     <li className={isActive ? "active" : ""}>
       <Link to={to} {...props}>
         {children}
-      </Link>
+      </Link> 
     </li>
   )
 }

@@ -5,6 +5,7 @@ const Menu = () => {
     <div>
       <ul>
         <li className="menuOptions">User Profile</li>
+        <li className="menuOptions">Help Page</li>
         <li className="menuOptions">Change Password</li>
         <li className="menuOptions">Log Out</li>
       </ul>

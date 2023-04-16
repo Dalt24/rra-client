@@ -3,7 +3,6 @@ import { getApiBaseUrl } from "../../functions/api/getApi";
 
 const AdminCalendar = () => {
 
-
     function handleAdmin() {
         const body = {
             firstName: "Jeff",

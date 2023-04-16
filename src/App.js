@@ -49,10 +49,9 @@ function App() {
     }
   }, [currentUser])
 
-  
+
   return (
     <>
-
       { // Loads Register Page, triggered when user clicks 'sign up' button on login page
         (isRegistered === false) && <Register registeredChanger={setIsRegistered} data={data} />
       }
@@ -85,9 +84,9 @@ function App() {
                 <Route path='/notifications' element={<Notification />} />
                 <Route path='/calendar' element={
                   <CalendarPage
-                  currentUser={currentUser}
-                  therapistData={therapistData}
-                  appointmentData={appointmentData}
+                    currentUser={currentUser}
+                    therapistData={therapistData}
+                    appointmentData={appointmentData}
                   />} />
               </Routes>
             </Router>

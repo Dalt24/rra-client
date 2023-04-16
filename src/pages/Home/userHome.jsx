@@ -2,9 +2,13 @@ import moment from "moment";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { getApiBaseUrl } from "../../functions/api/getApi";
+import { useNavigate } from 'react-router-dom'
+
+
+
 
 const UserHome = ({ currentUser }) => {
-
+    const navigate = useNavigate();
     const [futureAppointmentData, setFutureAppointmentData] = useState([])
     const [pastAppointmentData, setPastAppointmentData] = useState([])
     const [appointmentData, setAppointmentData] = useState([])
@@ -32,6 +36,7 @@ const UserHome = ({ currentUser }) => {
         const arrrr = appointmentData.find((data) => data.appointmentID === appointmentID)
         arrrr.isCanceled = "true"
         axios.put(`${getApiBaseUrl()}/api/Appointment/${appointmentID}`, arrrr)
+        navigate('/home', { replace: true })
     }
 
 

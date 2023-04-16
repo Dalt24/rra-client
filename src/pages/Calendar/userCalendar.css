@@ -1,0 +1,28 @@
+.modalFont {
+    margin-top: 3%;
+    max-height: 90%;
+    color: black;
+    font-size: 100;
+}
+
+.formStyling {
+    padding-top: 5px;
+    max-height: fit-content;
+}
+
+.centerCalendar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonStyling {
+  width: 90px;
+  height: 40px;
+}
+
+.centerTimeChoices {
+    display: inline-flex;
+  max-width: 1000px;
+  justify-content: center;
+}
