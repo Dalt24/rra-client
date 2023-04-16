@@ -61,17 +61,17 @@ const UserHome = ({ currentUser }) => {
                 <div className="col-md">
                     <h3>Upcoming Appointments</h3>
                     <ul >
-                        {futureAppointmentData.filter((d) => d.isCanceled === "false").map((appointment) => (
+                        {futureAppointmentData.filter((d) => d.isCanceled === "false").sort((a,b) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (
                             <li key={appointment.appointmentID} >
                                 <hr />
                                 <div className="row">
                                     <span className="col-md-10">
                                         <div>{moment(appointment.appointmentStartDate).format('dddd MMMM D, h:mm A')} - {moment(appointment.appointmentEndDate).format('h:mm A')}</div>
                                         <div>{appointment.locationAddress}</div>
-                                        <div>{appointment.therapistFirstName} {appointment.therapistLastName}</div>
+                                        <div>{appointment.therapyType} with {appointment.therapistFirstName} {appointment.therapistLastName}</div>
                                     </span>
 
-                                    <span className="col-md-2" style={{ paddingTop: "4%", marginLeft: "-4%" }}>
+                                    <span className="col-md-2" style={{ paddingTop: "5%", marginLeft: "-4%" }}>
                                         <button key={appointment.appointmentID} onClick={() => { handleCancel(appointment.appointmentID) }}>Cancel</button>
                                     </span>
                                 </div>
