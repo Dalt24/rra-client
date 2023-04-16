@@ -8,6 +8,7 @@ const Home = ({ currentUser, futureAppointmentData, pastAppointmentData }) => {
         // console.log(test)
         // var test2 = JSON.stringify(test)
         // console.log(test2)
+    console.log(currentUser)
     if (currentUser.isAdmin === "false" && currentUser.isTherapist === "false") {
         return (
             <UserHome
