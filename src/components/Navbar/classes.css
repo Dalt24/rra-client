@@ -10,7 +10,7 @@ body {
 }
 
 
-img{
+img {
   padding-top: 5px;
   width: 30px;
   background-color: transparent;
@@ -25,7 +25,7 @@ img{
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .siteTitle {
@@ -55,5 +55,42 @@ img{
 
 .nav li:hover {
   background-color: #439A97;
+}
 
+.dropdown {
+  background: #50a3a2;
+  position: relative;
+}
+
+.dropdown-content {
+  margin-top: 2px;
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  background: #50a3a2;
+  position: absolute;
+  left: -100px;
+  z-index: 999;
+}
+
+.dropdown-content a:hover {
+  outline: 1px solid rgb(101, 101, 103);
+}
+
+
+.dropBtn {
+  border-color: transparent;
+  background-color: transparent;
+  background: transparent;
+}
+
+.dropBtn:hover {
+  background-color: #439A97;
+}
+
+.dropBtn.active {
+  background-color: #439A97;
+}
+
+.dropBtn:focus {
+  outline: none;
 }

@@ -1,4 +1,5 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import { useState } from "react"
 import classes from "../Navbar/classes.css"
 import BellImg from "./images/bell-860.png"
 import CalendarImg from "./images/calendar-icon-png-4110.png"
@@ -22,12 +23,33 @@ export default function Navbar() {
 function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to)
   const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   return (
     <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
-        {children}
-      </Link> 
+      {to === '/menu' ? (
+        <div className="dropdown">
+          <button className="dropBtn" onClick={handleMenuClick}>
+            {children}
+          </button>
+          {isMenuOpen && (
+            <div className="dropdown-content">
+              <Link to="/user-profile">User Profile</Link>
+              <Link to="/help-page">Help Page</Link>
+              <Link to="/change-password">Change Password</Link>
+              <Link to="/log-out">Log Out</Link>
+            </div>
+          )}
+        </div>
+      ) : (
+        <Link to={to} {...props}>
+          {children}
+        </Link>
+      )}
     </li>
   )
 }

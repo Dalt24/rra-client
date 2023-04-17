@@ -4,11 +4,7 @@ import AdminHome from "./adminHome";
 import TherapistHome from "./therapistHome";
 
 const Home = ({ currentUser, futureAppointmentData, pastAppointmentData }) => {
-        // var test = JSON.parse('{"Monday":[{"start":"09:00 AM", "end":"12:00 PM"},{"start":"01:00 PM", "end":"05:00 PM"}],"Tuesday":[{"start":"01:00 PM", "end":"05:00 PM"}],"Wednesday":[],"Thursday":[{"start":"09:00 AM", "end":"12:00 PM"}],"Friday":[{"start":"01:00 PM", "end":"05:00 PM"}],"Saturday":[],"Sunday":[]}')
-        // console.log(test)
-        // var test2 = JSON.stringify(test)
-        // console.log(test2)
-    console.log(currentUser)
+
     if (currentUser.isAdmin === "false" && currentUser.isTherapist === "false") {
         return (
             <UserHome
