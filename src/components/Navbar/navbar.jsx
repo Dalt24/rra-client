@@ -1,5 +1,5 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import classes from "../Navbar/classes.css"
 import BellImg from "./images/bell-860.png"
 import CalendarImg from "./images/calendar-icon-png-4110.png"
@@ -24,6 +24,17 @@ function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to)
   const isActive = useMatch({ path: resolvedPath.pathname, end: true })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target))setIsMenuOpen(false)
+    }
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [dropdownRef])
 
 const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -32,14 +43,14 @@ const handleMenuClick = () => {
   return (
     <li className={isActive ? "active" : ""}>
       {to === '/menu' ? (
-        <div className="dropdown">
+        <div className="dropdown" ref={dropdownRef}>
           <button className="dropBtn" onClick={handleMenuClick}>
             {children}
           </button>
           {isMenuOpen && (
             <div className="dropdown-content">
-              <Link to="/user-profile">User Profile</Link>
-              <Link to="/help-page">Help Page</Link>
+              <Link to="/user-profile">Profile</Link>
+              <Link to="/help-page">Help</Link>
               <Link to="/change-password">Change Password</Link>
               <Link to="/log-out">Log Out</Link>
             </div>

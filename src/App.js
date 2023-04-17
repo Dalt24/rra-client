@@ -3,13 +3,14 @@ import Navbar from './components/Navbar/navbar.jsx'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import moment from 'moment'
 import axios from 'axios'
-import Menu from './pages/menu.jsx'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
 import Notification from './pages/notifications.jsx'
 import CalendarPage from './pages/Calendar/calendar.jsx'
 import Home from './pages/Home/home.jsx'
 import { getApiBaseUrl } from './functions/api/getApi.js'
+import Help from './pages/Help/help.jsx'
+import Profile from './pages/Profile/profile.jsx'
 
 
 function App() {
@@ -80,7 +81,8 @@ function App() {
                     futureAppointmentData={futureAppointmentData}
                     pastAppointmentData={pastAppointmentData}
                   />} />
-                <Route path='/menu' element={<Menu />} />
+                <Route path='/help-page' element={<Help currentUser={currentUser} />} />
+                <Route path='/user-profile' element={<Profile currentUser={currentUser} />} />
                 <Route path='/notifications' element={<Notification />} />
                 <Route path='/calendar' element={
                   <CalendarPage

@@ -183,7 +183,7 @@ const UserCalendar = (props) => {
         setDate(date);
         setDay(moment(date).format('dddd'));
     }
-    
+
 
     function handleIntervalClick(interval) {
         if (selectedIntervals.length === 0) {
@@ -207,8 +207,6 @@ const UserCalendar = (props) => {
             setSelectedIntervals([interval]);
         }
     }
-
-
 
 
     return <div>
@@ -237,7 +235,6 @@ const UserCalendar = (props) => {
         {/* <p>Appointments Available on {moment(date).format('MMMM Do YYYY')}</p> */}
         <div className="centerTimeChoices">
         {a !== undefined &&
-            
             a[day]?.map((c) => {
                 const startTime = moment(c.start, 'h:mm A');
                 const endTime = moment(c.end, 'h:mm A');
