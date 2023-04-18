@@ -61,3 +61,14 @@ form button {
   border: 5px solid;
   justify-content: center !important;
 }
+
+.handleCancel {
+  padding: 2px;
+  background-color: #439493;
+  color: white;
+  border-color: transparent;
+  border-radius: 15%;
+}
+
+
+  /* background: #50a3a2; */

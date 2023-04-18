@@ -1,10 +1,10 @@
 import React from "react";
-import UserHome from "./userHome";
-import AdminHome from "./adminHome";
-import TherapistHome from "./therapistHome";
+import UserHome from "./User/userHome";
+import AdminHome from "./Admin/adminHome";
+import TherapistHome from "./Therapist/therapistHome";
 
 const Home = ({ currentUser, futureAppointmentData, pastAppointmentData }) => {
-
+    console.log(currentUser)
     if (currentUser.isAdmin === "false" && currentUser.isTherapist === "false") {
         return (
             <UserHome
@@ -29,7 +29,7 @@ const Home = ({ currentUser, futureAppointmentData, pastAppointmentData }) => {
                 pastAppointmentData={pastAppointmentData}
             />)
     }
-    else return <div>No User, Reload & Log in Again</div>
+    else return <div>Not A User, Reload & Log in Again</div>
 };
 
 export default Home;

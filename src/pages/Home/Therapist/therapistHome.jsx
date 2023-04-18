@@ -1,7 +1,6 @@
 import moment from "moment";
 import { useNavigate } from 'react-router-dom'
-// import CalendarPage from "../calendar";
-import './classes.css';
+import '../../classes.css';
 
 const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData }) => {
     const navigate = useNavigate();

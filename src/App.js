@@ -3,14 +3,16 @@ import Navbar from './components/Navbar/navbar.jsx'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import moment from 'moment'
 import axios from 'axios'
+import { getApiBaseUrl } from './functions/api/getApi.js'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
 import Notification from './pages/notifications.jsx'
 import CalendarPage from './pages/Calendar/calendar.jsx'
 import Home from './pages/Home/home.jsx'
-import { getApiBaseUrl } from './functions/api/getApi.js'
 import Help from './pages/Help/help.jsx'
 import Profile from './pages/Profile/profile.jsx'
+import Edit from './pages/Home/Admin/editAdmin.jsx'
+import Reports from './pages/Home/Admin/reportsAdmin.jsx'
 
 
 function App() {
@@ -72,7 +74,7 @@ function App() {
           (isRegistered === true) && // default Home Screen, loads when user is Registered && Logged in Succesfully
           <>
             <Router>
-              <Navbar />
+              <Navbar setIsLoggedIn = {setIsLoggedIn} />
               <Routes>
                 <Route path='/' element={<Navigate replace to='/home' />} />
                 <Route path='/home' element={
@@ -82,8 +84,10 @@ function App() {
                     pastAppointmentData={pastAppointmentData}
                   />} />
                 <Route path='/help-page' element={<Help currentUser={currentUser} />} />
-                <Route path='/user-profile' element={<Profile currentUser={currentUser} />} />
+                <Route path='/user-profile' element={<Profile />} />
                 <Route path='/notifications' element={<Notification />} />
+                <Route path='/edit-admin' element={<Edit />} />
+                <Route path='/reports' element={<Reports appointmentData={appointmentData} />} />
                 <Route path='/calendar' element={
                   <CalendarPage
                     currentUser={currentUser}
@@ -100,3 +104,10 @@ function App() {
 }
 
 export default App
+
+
+
+
+        // <button type="submit" onClick={() => {
+        //     navigate('/reports', { replace: true })
+        // }}><h3>Reports</h3></button>

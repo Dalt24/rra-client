@@ -3,9 +3,10 @@
     max-height: 90%;
     color: black;
     font-size: 100;
-}
-
-.formStyling {
+  }
+  /* background-color: #439A97; */
+  /* background-color: #439A97; */
+  .formStyling {
     padding-top: 5px;
     max-height: fit-content;
 }
@@ -22,7 +23,31 @@
 }
 
 .centerTimeChoices {
-    display: inline-flex;
+  display: inline-flex;
   max-width: 1000px;
   justify-content: center;
+}
+
+.modalHeader {
+  justify-content: center;
+  text-align: center;
+}
+
+.button {
+  outline-color: #50a3a2;
+  background-color: white;
+  width: 250px;
+  border-radius: 3px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: #50a3a2;
+  font-weight: 300;
+}
+
+.button:hover {
+  background-color: #439A97;
 }

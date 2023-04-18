@@ -7,7 +7,7 @@ const TherapistCalendar = (props) => {
     const therapistInfo = (props.therapistData.find((data) => data.therapistID === props.currentUser.therapistID))
     const [availability, setAvailability] = useState(JSON.parse(therapistInfo.availability));
 
-    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const timeSlots = [
         '08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM',
         '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
@@ -18,7 +18,6 @@ const TherapistCalendar = (props) => {
 
 
     function handleSubmit() {
-        console.log(availability)
         const body = {
             firstName: "Therapist",
             lastName: "Therapist",
@@ -46,17 +45,17 @@ const TherapistCalendar = (props) => {
     const handleRemoveTimeSlot = (day, index) => {
         setAvailability(prevAvailability => ({
             ...prevAvailability,
-            [day]: prevAvailability[day].filter((_, i) => i !== index),
+            [day]: prevAvailability[day]?.filter((_, i) => i !== index),
         }));
     };
 
     return (
         <>
-            {daysOfWeek.map(day => (
+            {daysOfWeek?.map(day => (
                 <div key={day}>
                     <h3>{day}</h3>
                     <div>
-                        {availability[day].length > 0 ? (
+                        {availability[day]?.length > 0 ? (
                             availability[day].map(({ start, end }, i) => (
                                 <div key={i}>
                                     {start} - {end}

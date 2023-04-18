@@ -9,8 +9,9 @@ const CalendarPage = (props) => {
 
   if (props.currentUser.isAdmin === "false" && props.currentUser.isTherapist === "false") {
     return <UserCalendar currentUser={props.currentUser} therapistData={props.therapistData}/>
-  } else if (props.currentUser.isAdmin === "true") {
-    return <AdminCalendar />
+  }
+  else if (props.currentUser.isAdmin === "true") {
+    return <AdminCalendar therapistData={props.therapistData} />
   }
   else if (props.currentUser.isTherapist === "true") {
     return <TherapistCalendar currentUser={props.currentUser} therapistData={props.therapistData} />

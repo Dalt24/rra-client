@@ -1,18 +1,19 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { validatePassword, comparePassword } from '../functions/security/validatePassword';
 import { validateEmail } from '../functions/security/validateEmail';
 import { getApiBaseUrl } from '../functions/api/getApi';
 import './classes.css';
+var bcrypt = require('bcryptjs');
 
 const Register = ({ registeredChanger, data }) => {
+
   const [userEmail, setUserEmail] = useState("");
   const [passWordOne, setPassWordOne] = useState("");
   const [passWordOneConfirmation, setPassWordOneConfirmation] = useState("");
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
-
   const handleRegister = () => {
     const isValidEmail = validateEmail(userEmail)
     const isValidPassOne = validatePassword(passWordOne)
@@ -24,23 +25,31 @@ const Register = ({ registeredChanger, data }) => {
     // isValidPassOne === false && (alert('Invalid Password'))
     // isValidPassTwo === false && (alert('Invalid Conformation Password'))
     // isMatchingPass === false && (alert("Passwords Don't Match"))
+    
 
-
+    
+    
     const user = {
       firstName: firstName,
       lastName: lastName,
       emailAddress: userEmail,
       phoneNumber: phoneNumber,
-      userPassword: passWordOne,
+      userPassword: bcrypt.hashSync(passWordOne, bcrypt.genSaltSync()),
       isAdmin: "false",
       isTherapist: "false",
     }
 
+
+
+
+
     if (isDuplicateEmail === undefined) {
       isValidEmail && isValidPassOne && isValidPassTwo && isMatchingPass && phoneNumber && firstName && lastName ? (
-        axios.post(`${getApiBaseUrl()}/api/User`, user).then(registeredChanger(true))) : (registeredChanger(false))
+        axios.post(`${getApiBaseUrl()}/api/User`, user).then(registeredChanger(true))) : (registeredChanger(false)
+      ) 
     }
-
+    console.log('hi')
+    console.log(user)
     //need to check if email already exists in the system
 
     // if login credentials don't match DB set loggedInChanger(false)

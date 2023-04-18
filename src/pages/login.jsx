@@ -1,8 +1,9 @@
 import { React, useState} from 'react';
 // import axios from 'axios';
 import { validatePassword } from '../functions/security/validatePassword';
-import { validateEmail } from '../functions/security/validateEmail';
+// import { validateEmail } from '../functions/security/validateEmail';
 import './classes.css';
+var bcrypt = require('bcryptjs');
 
 const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, therapistData }) => {
   const [userEmail, setUserEmail] = useState("");
@@ -11,14 +12,15 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
     // axios logic, check if userEmail is in database && verify password
     const currUser = data.find((user) => user.emailAddress === userEmail)
     const currUserTherapist = therapistData.find((user) => user.emailAddress === userEmail)
-
-    if (currUser !== null && currUser !== undefined && currUser.userPassword === passWordOne) {
+    console.log(currUserTherapist)
+    console.log( bcrypt.compareSync(passWordOne, currUserTherapist.therapistPassword))
+    if (currUser !== null && currUser !== undefined && bcrypt.compareSync(passWordOne, currUser.userPassword) === true) {
       setCurrentUser(currUser)
       loggedInChanger(true)
     }
-    else if (currUserTherapist !== null && currUserTherapist !== undefined && currUserTherapist.therapistPassword === passWordOne) {
+    else if (currUserTherapist !== null && currUserTherapist !== undefined  && bcrypt.compareSync(passWordOne, currUserTherapist.therapistPassword) === true) {
       setCurrentUser(currUserTherapist)
-      loggedInChanger(true)
+        loggedInChanger(true)
     }// Need a failed to login modal / temp screen
     else {
       alert('failed to log in')
@@ -31,16 +33,14 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
   return (
     <div>
       <form className="form">
-        <input id="emailInput" onChange={e => validateEmail(e.target.value) ? setUserEmail(e.target.value) : ((event) => { event.className = "passwordInput" })} type="text" placeholder="Email" />
+        <input id="emailInput" onChange={e => setUserEmail(e.target.value)} type="text" placeholder="Email" />
         <input onChange={e => validatePassword(e.target.value) ? setPassWordOne(e.target.value) : (() => e.className = "passwordInput")} type="password" placeholder="Password" />
         <button type="submit" onClick={() => { validatePassword(passWordOne) && handleLogin() }}>Login</button>
         <button onClick={() => registeredChanger(false)}>Don't Have an Account? Sign Up</button>
       </form>
-
       {userEmail && <><h1>UserEmail Access: {userEmail}</h1></>}
       {passWordOne && <><h1>passWordOne Access: {passWordOne}</h1></>}
     </div >
-
   );
 };
 

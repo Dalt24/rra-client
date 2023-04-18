@@ -10,7 +10,7 @@ import { Form } from "react-bootstrap";
 import './userCalendar.css';
 
 const UserCalendar = (props) => {
-    const typesOfTherapy = ['Acupuncture', 'Stretching', 'Finish these', 'temp 2', 'temp 3'];
+    const typesOfTherapy = ['Stretching', 'Conditioning', 'Cryotherapy', 'Strengthening', 'Surgical rehabilitation'];
 
     // const navigate = useNavigate();
     const [date, setDate] = useState(new Date().toISOString());
@@ -39,7 +39,7 @@ const UserCalendar = (props) => {
             const appointmentDate = startDate
                 .hours(startTime.hours())
                 .minutes(startTime.minutes());
-            const endAptDate = moment(appointmentDate).add(30 * selectedIntervals.length, 'minutes')
+            const endAptDate = moment(appointmentDate).add(30 * selectedIntervals?.length, 'minutes')
             var locationCombo = address + " " + city + ", " + state + " " + zipCode
             const therapistInfo = (props.therapistData.find((data) => data.therapistID === therapist))
 
@@ -66,12 +66,12 @@ const UserCalendar = (props) => {
 
         return (
             <>
-                    <Button variant="primary" onClick={handleShow}>
+                    <Button  onClick={handleShow} className="button">
                         Submit
                     </Button>
 
                     <Modal show={show} onHide={handleClose} className="modalFont">
-                        <Modal.Header style={{ padding: 0 }}>
+                        <Modal.Header style={{ padding: 0 }} className="modalHeader">
                             <Modal.Title>
                                 <div>{therapistName}</div>
                                 <div>{getDate()}</div>
@@ -98,7 +98,8 @@ const UserCalendar = (props) => {
 
                                 <Form.Group controlId="address">
                                     <Form.Label>Street Address</Form.Label>
-                                    <Form.Control
+                                <Form.Control
+                                    style={{textAlign: "center"}}
                                         type="text"
                                         placeholder="Enter street address"
                                         value={address}
@@ -137,10 +138,10 @@ const UserCalendar = (props) => {
                                 </Form.Group>
 
                                 <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleClose}>
+                                    <Button variant="secondary" onClick={handleClose} className="button">
                                         Close
                                     </Button>
-                                    <Button variant="primary" onClick={handleSubmit}>
+                                    <Button variant="primary" onClick={handleSubmit} className="button">
                                         Confirm
                                     </Button>
                                 </Modal.Footer>
@@ -173,7 +174,7 @@ const UserCalendar = (props) => {
             .hours(startTime.hours())
             .minutes(startTime.minutes());
 
-        const endAptDate = moment(appointmentDate).add(30 * selectedIntervals.length, 'minutes')
+        const endAptDate = moment(appointmentDate).add(30 * selectedIntervals?.length, 'minutes')
 
         return appointmentDate.format('dddd h:mm A').toString() + " - " + endAptDate.format('h:mm A').toString()
     }
@@ -186,10 +187,10 @@ const UserCalendar = (props) => {
 
 
     function handleIntervalClick(interval) {
-        if (selectedIntervals.length === 0) {
+        if (selectedIntervals?.length === 0) {
             // If no intervals are selected, add the clicked interval to selectedIntervals
             setSelectedIntervals([interval]);
-        } else if (selectedIntervals.length === 1) {
+        } else if (selectedIntervals?.length === 1) {
             // If one interval is already selected, check if the clicked interval is the next 30-minute interval
             const selectedInterval = selectedIntervals[0];
             const nextInterval = moment(selectedInterval, 'h:mm A').add(30, 'minutes').format('h:mm A');
@@ -280,7 +281,7 @@ const UserCalendar = (props) => {
 
         {/* Change state Input to a dropdown of every state with search feature?? */}
         <span className="centerCalendar">
-            {selectedIntervals.length!==0 && therapistName && <ConfirmAppointmentModal />}
+            {selectedIntervals?.length!==0 && therapistName && <ConfirmAppointmentModal />}
         </span>
     </div>
 }

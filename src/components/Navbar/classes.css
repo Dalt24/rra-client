@@ -20,7 +20,9 @@ img {
 
 
 .nav {
-  background: #50a3a2;
+  /* background: #50a3a2; */
+
+  background: #439493;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -51,22 +53,20 @@ img {
 
 .nav li.active {
   background-color: #439A97;
+  
 }
 
 .nav li:hover {
   background-color: #439A97;
 }
 
-.dropdown {
-  background: #50a3a2;
-  position: relative;
-}
+
 
 .dropdown-content {
   margin-top: 2px;
   border-bottom-left-radius: 5%;
   border-bottom-right-radius: 5%;
-  background: #50a3a2;
+  background: #439493;
   position: absolute;
   left: -100px;
   z-index: 999;

@@ -1,9 +1,9 @@
 import moment from "moment";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getApiBaseUrl } from "../../functions/api/getApi";
+import { getApiBaseUrl } from "../../../functions/api/getApi";
 import { useNavigate } from 'react-router-dom'
-import './classes.css';
+import '../../classes.css';
 
 
 
@@ -52,8 +52,8 @@ const UserHome = ({ currentUser }) => {
                 <div className="col-md">
                     <h3>User Information</h3>
                     {/* static user info from currentUser prop */}
-                    <h3>{currentUser.firstName}</h3>
-                    <h3>{currentUser.lastName}</h3>
+                    <h3>{currentUser.firstName + " "}{currentUser.lastName}</h3>
+                    
                     <h3>{currentUser.emailAddress}</h3>
                     <h3>{currentUser.phoneNumber}</h3>
                 </div>
@@ -61,18 +61,18 @@ const UserHome = ({ currentUser }) => {
                 <div className="col-md">
                     <h3>Upcoming Appointments</h3>
                     <ul >
-                        {futureAppointmentData.filter((d) => d.isCanceled === "false").sort((a,b) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (
+                        {futureAppointmentData.filter((d) => d.isCanceled === "false").sort((a, b) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (
                             <li key={appointment.appointmentID} >
                                 <hr />
                                 <div className="row">
                                     <span className="col-md-10">
-                                        <div>{moment(appointment.appointmentStartDate).format('dddd MMMM D, h:mm A')} - {moment(appointment.appointmentEndDate).format('h:mm A')}</div>
+                                        <div style={{ fontSize: "16px" }}>{moment(appointment.appointmentStartDate).format('dddd MMMM D, h:mm A')} - {moment(appointment.appointmentEndDate).format('h:mm A')}</div>
                                         <div>{appointment.locationAddress}</div>
                                         <div>{appointment.therapyType} with {appointment.therapistFirstName} {appointment.therapistLastName}</div>
                                     </span>
 
                                     <span className="col-md-2" style={{ paddingTop: "5%", marginLeft: "-4%" }}>
-                                        <button key={appointment.appointmentID} onClick={() => { handleCancel(appointment.appointmentID) }}>Cancel</button>
+                                        <button className="handleCancel" key={appointment.appointmentID} onClick={() => { handleCancel(appointment.appointmentID) }}>Cancel</button>
                                     </span>
                                 </div>
                             </li>
@@ -87,7 +87,7 @@ const UserHome = ({ currentUser }) => {
                                 <hr />
                                 <div>{moment(appointment.appointmentStartDate).format('dddd MMMM D, h:mm A')} - {moment(appointment.appointmentEndDate).format('h:mm A')}</div>
                                 <div>{appointment.locationAddress}</div>
-                                <div>{appointment.therapistFirstName} {appointment.therapistLastName}</div>
+                                <div>{appointment.therapyType} with {appointment.therapistFirstName} {appointment.therapistLastName}</div>
                             </li>
                         ))}
                     </ul>
