@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import moment from 'moment'
 import axios from 'axios'
 import { getApiBaseUrl } from './functions/api/getApi.js'
-import Login from './pages/login.jsx'
-import Register from './pages/register.jsx'
+import Login from './pages/UserAuth/login.jsx'
+import Register from './pages/UserAuth/register.jsx'
 import Notification from './pages/notifications.jsx'
 import CalendarPage from './pages/Calendar/calendar.jsx'
 import Home from './pages/Home/home.jsx'
@@ -13,6 +13,7 @@ import Help from './pages/Help/help.jsx'
 import Profile from './pages/Profile/profile.jsx'
 import Edit from './pages/Home/Admin/editAdmin.jsx'
 import Reports from './pages/Home/Admin/reportsAdmin.jsx'
+import ChangePassword from './pages/UserAuth/changePassword.jsx'
 
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
                   />} />
                 <Route path='/help-page' element={<Help currentUser={currentUser} />} />
                 <Route path='/user-profile' element={<Profile />} />
+                <Route path='/change-password' element={<ChangePassword currentUser={currentUser} />} />
                 <Route path='/notifications' element={<Notification />} />
                 <Route path='/edit-admin' element={<Edit />} />
                 <Route path='/reports' element={<Reports appointmentData={appointmentData} />} />

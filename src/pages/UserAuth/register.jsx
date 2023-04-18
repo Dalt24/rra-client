@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { validatePassword, comparePassword } from '../functions/security/validatePassword';
-import { validateEmail } from '../functions/security/validateEmail';
-import { getApiBaseUrl } from '../functions/api/getApi';
-import './classes.css';
+import { validatePassword, comparePassword } from '../../functions/security/validatePassword';
+import { validateEmail } from '../../functions/security/validateEmail';
+import { getApiBaseUrl } from '../../functions/api/getApi';
+import '../classes.css';
 var bcrypt = require('bcryptjs');
 
 const Register = ({ registeredChanger, data }) => {

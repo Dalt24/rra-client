@@ -1,19 +1,15 @@
 import { React, useState} from 'react';
-// import axios from 'axios';
-import { validatePassword } from '../functions/security/validatePassword';
-// import { validateEmail } from '../functions/security/validateEmail';
-import './classes.css';
+import { validatePassword } from '../../functions/security/validatePassword';
+import '../classes.css';
 var bcrypt = require('bcryptjs');
 
 const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, therapistData }) => {
   const [userEmail, setUserEmail] = useState("");
   const [passWordOne, setPassWordOne] = useState("");
   const handleLogin = () => {
-    // axios logic, check if userEmail is in database && verify password
+    // axios logic, check if userEmail is in database && verify password by checking the hash against the input
     const currUser = data.find((user) => user.emailAddress === userEmail)
     const currUserTherapist = therapistData.find((user) => user.emailAddress === userEmail)
-    console.log(currUserTherapist)
-    console.log( bcrypt.compareSync(passWordOne, currUserTherapist.therapistPassword))
     if (currUser !== null && currUser !== undefined && bcrypt.compareSync(passWordOne, currUser.userPassword) === true) {
       setCurrentUser(currUser)
       loggedInChanger(true)
