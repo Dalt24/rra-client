@@ -4,6 +4,7 @@ import classes from "../Navbar/classes.css"
 import BellImg from "./images/bell-860.png"
 import CalendarImg from "./images/calendar-icon-png-4110.png"
 import MenuImg from "./images/menu-icon-19345.png"
+import { useNavigate } from 'react-router-dom'
 
 export default function Navbar({setIsLoggedIn}) {
   return (
@@ -20,7 +21,8 @@ export default function Navbar({setIsLoggedIn}) {
   )
 }
 
-function CustomLink({setIsLoggedIn, to, children, ...props}) {
+function CustomLink({ setIsLoggedIn, to, children, ...props }) {
+  const navigate = useNavigate();
   const resolvedPath = useResolvedPath(to)
   const isActive = useMatch({ path: resolvedPath.pathname, end: true })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -43,6 +45,8 @@ function CustomLink({setIsLoggedIn, to, children, ...props}) {
   const handleLogOut = () => {
     setIsMenuOpen(false);
     setIsLoggedIn(false);
+    navigate('/', { replace: true })
+    window.location.reload(false);
   };
 
   return (

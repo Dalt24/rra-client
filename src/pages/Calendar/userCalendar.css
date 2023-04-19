@@ -34,20 +34,16 @@
 }
 
 .button {
-  outline-color: #50a3a2;
-  background-color: white;
-  width: 250px;
-  border-radius: 3px;
-  font-family: "Source Sans Pro", sans-serif;
-  padding: 10px 15px;
-  margin: 0 auto 10px auto;
-  display: block;
-  text-align: center;
-  font-size: 18px;
-  color: #50a3a2;
-  font-weight: 300;
+  padding: 2px;
+  background-color: #439493;
+  color: #fff;
+  border-color: transparent;
+  border-radius: 5%;
+  font-size: 26px;
 }
 
 .button:hover {
   background-color: #439A97;
+  outline-color: gray;
+  border-color: #155a59;
 }

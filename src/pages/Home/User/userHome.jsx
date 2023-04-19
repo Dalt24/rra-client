@@ -31,12 +31,16 @@ const UserHome = ({ currentUser }) => {
     }, [currentUser])
 
 
-    const handleCancel = (appointmentID) => {
+const handleCancel = (appointmentID) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this appointment?")
+    if (confirmDelete) {
         const arrrr = appointmentData.find((data) => data.appointmentID === appointmentID)
         arrrr.isCanceled = "true"
         axios.put(`${getApiBaseUrl()}/api/Appointment/${appointmentID}`, arrrr)
         navigate('/home', { replace: true })
     }
+}
+
 
 
     return (<div>
@@ -82,7 +86,7 @@ const UserHome = ({ currentUser }) => {
                 <div className="col-md">
                     <h3>Past Appointments</h3>
                     <ul>
-                        {pastAppointmentData.map((appointment) => (
+                        {pastAppointmentData.sort((b, a) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (
                             <li key={appointment.appointmentID}>
                                 <hr />
                                 <div>{moment(appointment.appointmentStartDate).format('dddd MMMM D, h:mm A')} - {moment(appointment.appointmentEndDate).format('h:mm A')}</div>

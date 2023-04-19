@@ -34,8 +34,6 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
         <button type="submit" onClick={() => { validatePassword(passWordOne) && handleLogin() }}>Login</button>
         <button onClick={() => registeredChanger(false)}>Don't Have an Account? Sign Up</button>
       </form>
-      {userEmail && <><h1>UserEmail Access: {userEmail}</h1></>}
-      {passWordOne && <><h1>passWordOne Access: {passWordOne}</h1></>}
     </div >
   );
 };
