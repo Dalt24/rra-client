@@ -4,17 +4,15 @@ import Create from "./createAdmin.jsx"
 import Edit from './editAdmin.jsx';
 
 
-const AdminHome = ({data, therapistData }) => {
+const AdminHome = ({data, therapistData, currentUser }) => {
     const navigate = useNavigate();
-    console.log(data)
-    console.log(therapistData)
     return <div className='admin-container'>
 
         {/* <button type="submit" onClick={() => { 
             navigate('/create-admin' {replace: true})*/}
         {/* // }}><h3>Add Admin/PT</h3></button> */}
         <Create />
-        <Edit therapistData={therapistData} userData={data} />
+        <Edit therapistData={therapistData} userData={data} currentUser={currentUser}/>
         {/* <button type="submit" onClick={() => {
             navigate('/edit-admin', { replace: true })
         }}><h3>Edit Admin/PT</h3></button> */}

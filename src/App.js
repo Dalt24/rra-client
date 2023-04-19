@@ -6,7 +6,6 @@ import axios from 'axios'
 import { getApiBaseUrl } from './functions/api/getApi.js'
 import Login from './pages/UserAuth/login.jsx'
 import Register from './pages/UserAuth/register.jsx'
-import Notification from './pages/notifications.jsx'
 import CalendarPage from './pages/Calendar/calendar.jsx'
 import Home from './pages/Home/home.jsx'
 import Help from './pages/Help/help.jsx'
@@ -73,7 +72,7 @@ function App() {
           (isRegistered === true) && // default Home Screen, loads when user is Registered && Logged in Succesfully
           <>
             <Router>
-              <Navbar setIsLoggedIn = {setIsLoggedIn} />
+              <Navbar setIsLoggedIn = {setIsLoggedIn} appointmentData={appointmentData} currentUser={currentUser} />
               <Routes>
                 <Route path='/' element={<Navigate replace to='/home' />} />
                 <Route path='/home' element={
@@ -87,7 +86,7 @@ function App() {
                 <Route path='/help-page' element={<Help currentUser={currentUser} />} />
                 <Route path='/user-profile' element={<Profile currentUser={currentUser} />} />
                 <Route path='/change-password' element={<ChangePassword currentUser={currentUser} />} />
-                <Route path='/notifications' element={<Notification />} />
+                {/* <Route path='/notifications' element={<Notification />} /> */}
                 {/* <Route path='/edit-admin' element={<Edit therapistData={therapistData} userData={data} />} /> */}
                 <Route path='/reports' element={<Reports appointmentData={appointmentData} />} />
                 <Route path='/calendar' element={

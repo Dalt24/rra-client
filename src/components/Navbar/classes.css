@@ -63,13 +63,16 @@ img {
 
 
 .dropdown-content {
-  margin-top: 2px;
-  border-bottom-left-radius: 5%;
-  border-bottom-right-radius: 5%;
+  margin-top: 3px;
+  border-bottom-left-radius: 2%;
+  border-bottom-right-radius: 2%;
   background: #439493;
   position: absolute;
   left: -100px;
   z-index: 999;
+  outline: solid;
+
+  outline-color: black;
 }
 
 .dropdown-content a:hover {
@@ -93,4 +96,20 @@ img {
 
 .dropBtn:focus {
   outline: none;
+}
+
+.dropdown-notification {
+  margin-top: 4px;
+  border-bottom-left-radius: 2%;
+  border-bottom-right-radius: 2%;
+  background: #439493;
+  position: absolute;
+  left: -110px;
+  z-index: 999;
+  outline: solid;
+  outline-color: black;
+}
+
+.dropdown-notification a:hover {
+  outline: 1px solid rgb(101, 101, 103);
 }

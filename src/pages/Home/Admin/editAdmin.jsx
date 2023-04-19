@@ -4,14 +4,14 @@ import { Modal, Button, Form } from "react-bootstrap";
 import axios from 'axios';
 import { getApiBaseUrl } from '../../../functions/api/getApi';
 
-const Edit = ({ therapistData, userData }) => {
+const Edit = ({ therapistData, userData, currentUser }) => {
   const [show, setShow] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [selectedType, setSelectedType] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  console.log(currentUser)
   const handleDropdownChange = (e) => {
     const { name, value } = e.target;
     setSelectedId(value);
@@ -78,8 +78,9 @@ const Edit = ({ therapistData, userData }) => {
                 onChange={handleDropdownChange}
               >
                 <option value="">Select an admin to delete</option>
+              {console.log(currentUser)}
                 {userData
-                  .filter((d) => d.isAdmin === "true")
+                  .filter((d) => d.isAdmin === "true" && d.userID !== currentUser.userID)
                   .map((admin) => (
                     <option key={admin.userID} value={admin.userID}>
                       {admin.firstName}
