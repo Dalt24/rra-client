@@ -57,3 +57,11 @@ form button {
   border: 5px solid;
   justify-content: center !important;
 }
+
+.passwordContainer {
+  text-align: center;
+}
+
+.password{
+  margin: 5px;
+}

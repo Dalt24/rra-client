@@ -65,10 +65,17 @@ form button {
 .handleCancel {
   padding: 2px;
   background-color: #439493;
-  color: white;
+  color: #fff;
   border-color: transparent;
   border-radius: 15%;
 }
 
-
+  /* padding:0.6em 2em;
+  border-radius: 8px;
+  color:#fff; 
+  background-color:#56a0a1; 
+  font-size:1.1em;
+  border:0;
+  cursor:pointer;
+  margin:1em; */
   /* background: #50a3a2; */

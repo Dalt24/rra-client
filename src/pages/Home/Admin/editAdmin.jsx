@@ -1,141 +1,104 @@
-import { getApiBaseUrl } from "../../../functions/api/getApi"
-import axios from "axios"
-import { useState } from "react";
+import React, { useState } from 'react';
+import './classes.css';
 import { Modal, Button, Form } from "react-bootstrap";
+import axios from 'axios';
+import { getApiBaseUrl } from '../../../functions/api/getApi';
 
+const Edit = ({ therapistData, userData }) => {
+  const [show, setShow] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
-const Edit = () => {
-    const [show, setShow] = useState(false);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [emailAddress, setEmailAddress] = useState("");
-    const [userType, setUserType] = useState("");
-    const [password, setPassword] = useState("");
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const handleDropdownChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedId(value);
+    setSelectedType(name);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        //   isTherapist: userType === "therapist" ? "true" : "false",
-        //   isAdministrator: userType === "admin" ? "true" : "false",
+  const handleDelete = () => {
+    if (selectedType === "therapist") {
+      axios
+        .delete(`${getApiBaseUrl()}/api/Therapist/${selectedId}`)
+        .then((response) => {
+          handleClose();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (selectedType === "admin") {
+      axios
+        .delete(`${getApiBaseUrl()}/api/User/${selectedId}`)
+        .then((response) => {
+          handleClose();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
-        if (userType === "therapist") {
-            const body = {
-                firstName: firstName,
-                lastName: lastName,
-                availability: `{"Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}`,
-                emailAddress: emailAddress,
-                therapistPassword: "TempPassword123!!",
-                isTherapist: "true",
-                isAdmin: "false",
-            };
+  return (
+    <>
+      <Button className='btn-custom' onClick={handleShow}>
+        Delete Therapist/Admin
+      </Button>
 
-            axios.post(`${getApiBaseUrl()}/api/Therapist`, body).then((response) => {
-                // handle success
-                handleClose();
-            }).catch((error) => {
-                // handle error
-            });
-        } else if (userType === "admin") {
-            const body = {
-                firstName: firstName,
-                lastName: lastName,
-                availability: "[]",
-                emailAddress: emailAddress,
-                therapistPassword: "TempPassword123!!",
-                isAdmin: "true",
-                isTherapist: "false",
-            };
-
-            axios.post(`${getApiBaseUrl()}/api/User`, body).then((response) => {
-                // handle success
-                handleClose();
-            }).catch((error) => {
-                // handle error
-            });
-        }
-
-    };
-
-    return (
-        <>
-            <Button variant="primary" onClick={handleShow}>
-                Edit User
-            </Button>
-
-            <Modal show={show} onHide={handleClose} className="modalFont">
-                <Modal.Header style={{ padding: 0 }}>
-                    <Modal.Title>Edit</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form className="formStyling">
-                        <Form.Group controlId="firstName">
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter first name"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group controlId="lastName">
-                            <Form.Label>Last Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter last name"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group controlId="emailAddress">
-                            <Form.Label>Email Address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter email address"
-                                value={emailAddress}
-                                onChange={(e) => setEmailAddress(e.target.value)}
-                            />
-                        </Form.Group>
-
-                        <Form.Group controlId="userType">
-                            <Form.Label>User Type</Form.Label>
-                            <Form.Control
-                                as="select"
-                                onChange={(e) => {
-                                    setUserType(e.target.value);
-                                }}
-                            >
-                                <option> -- Select a User Type -- </option>
-                                <option value="therapist">Therapist</option>
-                                <option value="admin">Administrator</option>
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group controlId="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter temporary password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
-                        Create
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
-    );
-}
-
+      <Modal show={show} onHide={handleClose} className="modalFont">
+        <Modal.Header style={{ padding: 0 }}>
+          <Modal.Title>Delete Therapist/Admin</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form className="formStyling">
+            <Form.Group>
+              <Form.Label>Therapists</Form.Label>
+              <Form.Control
+                as="select"
+                name="therapist"
+                value={selectedType === "therapist" ? selectedId : ""}
+                onChange={handleDropdownChange}
+              >
+                <option value="">Select a therapist to delete</option>
+                {therapistData
+                  .map((therapist) => (
+                    <option key={therapist.therapistID} value={therapist.therapistID}>
+                      {therapist.firstName}
+                    </option>
+                  ))}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Admins</Form.Label>
+              <Form.Control
+                as="select"
+                name="admin"
+                value={selectedType === "admin" ? selectedId : ""}
+                onChange={handleDropdownChange}
+              >
+                <option value="">Select an admin to delete</option>
+                {userData
+                  .filter((d) => d.isAdmin === "true")
+                  .map((admin) => (
+                    <option key={admin.userID} value={admin.userID}>
+                      {admin.firstName}
+                    </option>
+                  ))}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 export default Edit;

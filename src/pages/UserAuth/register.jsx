@@ -14,6 +14,7 @@ const Register = ({ registeredChanger, data }) => {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+  
   const handleRegister = () => {
     const isValidEmail = validateEmail(userEmail)
     const isValidPassOne = validatePassword(passWordOne)

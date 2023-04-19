@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getApiBaseUrl } from "../../../functions/api/getApi";
 import { useNavigate } from 'react-router-dom'
-import '../../classes.css';
+import '../../Home/classes.css';
 
 
 
@@ -66,7 +66,7 @@ const UserHome = ({ currentUser }) => {
                                 <hr />
                                 <div className="row">
                                     <span className="col-md-10">
-                                        <div style={{ fontSize: "16px" }}>{moment(appointment.appointmentStartDate).format('dddd MMMM D, h:mm A')} - {moment(appointment.appointmentEndDate).format('h:mm A')}</div>
+                                        <div >{moment(appointment.appointmentStartDate).format('dddd MMMM D, h:mm A')} - {moment(appointment.appointmentEndDate).format('h:mm A')}</div>
                                         <div>{appointment.locationAddress}</div>
                                         <div>{appointment.therapyType} with {appointment.therapistFirstName} {appointment.therapistLastName}</div>
                                     </span>

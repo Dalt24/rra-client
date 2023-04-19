@@ -13,7 +13,7 @@ const Create = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-var bcrypt = require('bcryptjs');
+    var bcrypt = require('bcryptjs');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -60,7 +60,7 @@ var bcrypt = require('bcryptjs');
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button className="btn-custom" onClick={handleShow}>
                 Create Therapist/Admin
             </Button>
 
@@ -121,8 +121,7 @@ var bcrypt = require('bcryptjs');
                             />
                         </Form.Group>
                         <Form.Group controlId="password">
-                            <Form.Label>The Temporary Password is "TempPassword123"</Form.Label>
-
+                            <Form.Label>The Temporary Password is "TempPassword123" Inform the Therapist or Admin to Change this on Login</Form.Label>
                         </Form.Group>
 
                     </Form>

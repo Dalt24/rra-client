@@ -11,10 +11,8 @@ import CalendarPage from './pages/Calendar/calendar.jsx'
 import Home from './pages/Home/home.jsx'
 import Help from './pages/Help/help.jsx'
 import Profile from './pages/Profile/profile.jsx'
-import Edit from './pages/Home/Admin/editAdmin.jsx'
 import Reports from './pages/Home/Admin/reportsAdmin.jsx'
 import ChangePassword from './pages/UserAuth/changePassword.jsx'
-
 
 function App() {
 
@@ -83,12 +81,14 @@ function App() {
                     currentUser={currentUser}
                     futureAppointmentData={futureAppointmentData}
                     pastAppointmentData={pastAppointmentData}
+                    therapistData={therapistData}
+                    data={data}
                   />} />
                 <Route path='/help-page' element={<Help currentUser={currentUser} />} />
-                <Route path='/user-profile' element={<Profile />} />
+                <Route path='/user-profile' element={<Profile currentUser={currentUser} />} />
                 <Route path='/change-password' element={<ChangePassword currentUser={currentUser} />} />
                 <Route path='/notifications' element={<Notification />} />
-                <Route path='/edit-admin' element={<Edit />} />
+                {/* <Route path='/edit-admin' element={<Edit therapistData={therapistData} userData={data} />} /> */}
                 <Route path='/reports' element={<Reports appointmentData={appointmentData} />} />
                 <Route path='/calendar' element={
                   <CalendarPage

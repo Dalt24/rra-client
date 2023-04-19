@@ -1,0 +1,30 @@
+.reports-container {
+    margin-left: 3%;
+    text-align: center;
+}
+
+.btn-custom {
+    padding: 2px;
+    background-color: #439493;
+    color: #fff;
+    border-color: transparent;
+    border-radius: 5%;
+    left:50%;
+    margin: 1%;
+    margin-top: 15%;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.btn-custom:hover {
+    background-color: #439493;
+    outline: gray;
+    border-color: gray;
+}
+
+.admin-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    
+}

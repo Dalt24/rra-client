@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-
+import './classes.css';
 
 
 const Reports = ({ appointmentData }) => {

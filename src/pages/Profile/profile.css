@@ -1,3 +1,26 @@
-.horribleBlue{
-    color:blue;
+.tablePadding1 {
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.tablePadding {
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 10px;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.centerTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.moveDown {
+    padding-left: 25px;
+    padding-bottom: 50px;
+    padding-top: 10px;
+    text-align: center;
 }
