@@ -1,20 +1,21 @@
 .modalFont {
-    margin-top: 3%;
-    max-height: 90%;
-    color: black;
-    font-size: 100;
-  }
-  /* background-color: #439A97; */
-  /* background-color: #439A97; */
-  .formStyling {
-    padding-top: 5px;
-    max-height: fit-content;
+  margin-top: 3%;
+  max-height: 90%;
+  color: black;
+  font-size: 100;
+}
+
+/* background-color: #439A97; */
+/* background-color: #439A97; */
+.formStyling {
+  padding-top: 5px;
+  max-height: fit-content;
 }
 
 .centerCalendar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .buttonStyling {
@@ -23,10 +24,13 @@
 }
 
 .centerTimeChoices {
-  display: inline-flex;
-  max-width: 1000px;
-  justify-content: center;
-}
+    /* style={{paddingLeft: "40%", maxWidth:"30%"}}
+     */
+     margin-top: 50px;
+     max-width: 30%;
+     padding-left: 46%;
+    margin-bottom: 50px;
+    }
 
 .modalHeader {
   justify-content: center;
@@ -46,4 +50,17 @@
   background-color: #439A97;
   outline-color: gray;
   border-color: #155a59;
+}
+
+.button2 {
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  width: 100px;
+  border-radius: 15px;
+  font-family: "Source Sans Pro", sans-serif;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: #50a3a2;
+  font-weight: 300;
+  margin: 5px;
 }

@@ -1,17 +1,18 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
-import classes from "../Navbar/classes.css"
+import { useNavigate } from 'react-router-dom'
+import "../Navbar/classes.css"
 import BellImg from "./images/bell-860.png"
 import CalendarImg from "./images/calendar-icon-png-4110.png"
 import MenuImg from "./images/menu-icon-19345.png"
-import { useNavigate } from 'react-router-dom'
 import moment from "moment"
+import RRA_Logo from "./images/RRA_Logo.png"
 
 export default function Navbar({ setIsLoggedIn, appointmentData, currentUser }) {
   return (
     <nav className="nav">
-      <Link to="/home" className={classes.siteTitle}>
-        Remote Rehab Association
+      <Link to="/home" className="title">
+        <img className="siteTitle" src={RRA_Logo} alt="RRA Logo Icon"></img> Remote Rehab Association
       </Link>
       <ul>
         <CustomLink to="/calendar"><img src={CalendarImg} alt="Calendar Button Icon"></img></CustomLink>

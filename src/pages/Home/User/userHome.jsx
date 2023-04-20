@@ -46,14 +46,14 @@ const handleCancel = (appointmentID) => {
     return (<div>
 
         <div className="container">
-            <h1>
-                {"Welcome " + currentUser.firstName + " " + currentUser.lastName}
+            <h1 className="head">
+                <span className="header">{"Welcome " + currentUser.firstName + " " + currentUser.lastName}</span>
                 <br />
                 <br />
 
             </h1>
             <div className="row">
-                <div className="col-md">
+                <div className="col-md user">
                     <h3>User Information</h3>
                     {/* static user info from currentUser prop */}
                     <h3>{currentUser.firstName + " "}{currentUser.lastName}</h3>
@@ -62,7 +62,7 @@ const handleCancel = (appointmentID) => {
                     <h3>{currentUser.phoneNumber}</h3>
                 </div>
 
-                <div className="col-md">
+                <div className="col-md user">
                     <h3>Upcoming Appointments</h3>
                     <ul >
                         {futureAppointmentData.filter((d) => d.isCanceled === "false").sort((a, b) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (
@@ -83,7 +83,7 @@ const handleCancel = (appointmentID) => {
                         ))}
                     </ul>
                 </div>
-                <div className="col-md">
+                <div className="col-md user">
                     <h3>Past Appointments</h3>
                     <ul>
                         {pastAppointmentData.sort((b, a) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (

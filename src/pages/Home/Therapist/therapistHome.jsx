@@ -72,7 +72,7 @@ const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData
                     <h3>Past Appointments</h3>
                     {/* map through cards showing all appointments before today */}
                     <ul>
-                        {pastAppointmentData.sort((a, b) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (
+                        {pastAppointmentData.sort((b, a) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => (
                             <li key={appointment.appointmentID}>
                                 {console.log(appointment)}
                                 {/* <div>{appointment.firstName} {appointment.lastName}</div> */}

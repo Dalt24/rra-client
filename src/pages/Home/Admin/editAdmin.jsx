@@ -11,7 +11,7 @@ const Edit = ({ therapistData, userData, currentUser }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(currentUser)
+
   const handleDropdownChange = (e) => {
     const { name, value } = e.target;
     setSelectedId(value);

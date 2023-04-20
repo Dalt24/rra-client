@@ -9,7 +9,8 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   color: white;
   font-weight: 500;
-  background-color: #56a0a1;
+  /* background-color: #7097A8; */
+  background-color: #ADE4DB;
   /* background-color: #62B6B7; */
 
   width: 100%;
@@ -20,7 +21,7 @@ button.mbtn {
   padding:0.6em 2em;
   border-radius: 8px;
   color:#fff; /*Simple white text*/
-  background-color:#56a0a1; /*Change to our preffered background colors*/
+  background-color:#7097A8; /*Change to our preffered background colors*/
   font-size:1.1em;
   border:0;
   cursor:pointer;

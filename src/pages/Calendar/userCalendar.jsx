@@ -66,88 +66,88 @@ const UserCalendar = (props) => {
 
         return (
             <>
-                    <Button  onClick={handleShow} className="button">
-                        Submit
-                    </Button>
+                <Button onClick={handleShow} className="button">
+                    Submit
+                </Button>
 
-                    <Modal show={show} onHide={handleClose} className="modalFont">
-                        <Modal.Header style={{ padding: 0 }} className="modalHeader">
-                            <Modal.Title>
-                                <div>{therapistName}</div>
-                                <div>{getDate()}</div>
-                            </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Form className="formStyling">
-                                <Form.Group controlId="therapyType">
-                                    <Form.Label>Therapy Type</Form.Label>
-                                    <Form.Control
-                                        as="select"
-                                        onChange={(e) => {
-                                            setTherapyType(e.target.value);
-                                        }}
-                                    >
-                                        <option> -- Select a Therapy Type -- </option>
-                                        {typesOfTherapy.map((type) => (
-                                            <option value={type} key={type}>
-                                                {type}
-                                            </option>
-                                        ))}
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Form.Group controlId="address">
-                                    <Form.Label>Street Address</Form.Label>
+                <Modal show={show} onHide={handleClose} className="modalFont">
+                    <Modal.Header style={{ padding: 0 }} className="modalHeader">
+                        <Modal.Title>
+                            <div>{therapistName}</div>
+                            <div>{getDate()}</div>
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form className="formStyling">
+                            <Form.Group controlId="therapyType">
+                                <Form.Label>Therapy Type</Form.Label>
                                 <Form.Control
-                                    style={{textAlign: "center"}}
-                                        type="text"
-                                        placeholder="Enter street address"
-                                        value={address}
-                                        onChange={(e) => setAddress(e.target.value)}
-                                    />
-                                </Form.Group>
+                                    as="select"
+                                    onChange={(e) => {
+                                        setTherapyType(e.target.value);
+                                    }}
+                                >
+                                    <option> -- Select a Therapy Type -- </option>
+                                    {typesOfTherapy.map((type) => (
+                                        <option value={type} key={type}>
+                                            {type}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
 
-                                <Form.Group controlId="city">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter city"
-                                        value={city}
-                                        onChange={(e) => setCity(e.target.value)}
-                                    />
-                                </Form.Group>
+                            <Form.Group controlId="address">
+                                <Form.Label>Street Address</Form.Label>
+                                <Form.Control
+                                    style={{ textAlign: "center" }}
+                                    type="text"
+                                    placeholder="Enter street address"
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                />
+                            </Form.Group>
 
-                                <Form.Group controlId="state">
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter state"
-                                        value={state}
-                                        onChange={(e) => setState(e.target.value)}
-                                    />
-                                </Form.Group>
+                            <Form.Group controlId="city">
+                                <Form.Label>City</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter city"
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                />
+                            </Form.Group>
 
-                                <Form.Group controlId="zipCode">
-                                    <Form.Label>Zip Code</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter zip code"
-                                        value={zipCode}
-                                        onChange={(e) => setZipCode(e.target.value)}
-                                    />
-                                </Form.Group>
+                            <Form.Group controlId="state">
+                                <Form.Label>State</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter state"
+                                    value={state}
+                                    onChange={(e) => setState(e.target.value)}
+                                />
+                            </Form.Group>
 
-                                <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleClose} className="button">
-                                        Close
-                                    </Button>
-                                    <Button variant="primary" onClick={handleSubmit} className="button">
-                                        Confirm
-                                    </Button>
-                                </Modal.Footer>
-                            </Form>
-                        </Modal.Body>
-                    </Modal>
+                            <Form.Group controlId="zipCode">
+                                <Form.Label>Zip Code</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter zip code"
+                                    value={zipCode}
+                                    onChange={(e) => setZipCode(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose} className="button">
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={handleSubmit} className="button">
+                                    Confirm
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
             </>
         );
     }
@@ -235,53 +235,76 @@ const UserCalendar = (props) => {
 
         {/* <p>Appointments Available on {moment(date).format('MMMM Do YYYY')}</p> */}
         <div className="centerTimeChoices">
-        {a !== undefined &&
-            a[day]?.map((c) => {
-                const startTime = moment(c.start, 'h:mm A');
-                const endTime = moment(c.end, 'h:mm A');
-                const timeIntervals = [];
-                let currentTime = startTime;
-                const startDate = moment(date);
-                let cnt = 0
+            {a !== undefined &&
+                a[day]?.map((c) => {
+                    const startTime = moment(c.start, 'h:mm A');
+                    const endTime = moment(c.end, 'h:mm A');
+                    const timeIntervals = [];
+                    let currentTime = startTime;
+                    const startDate = moment(date);
+                    let cnt = 0
 
-                while (currentTime < endTime) {
-                    const appointmentDate = (startDate
-                        .hours(currentTime.hours())
-                        .minutes(currentTime.minutes()));
-                    const appointment = appointmentData.find(d => d.appointmentStartDate === appointmentDate._d.toISOString() && d.therapistID === therapist && d.isCanceled !== "true");
-                    if (appointment && cnt === 0) {
-                        currentTime.add(1, 'hours');
-                        cnt++
+                    while (currentTime < endTime) {
+                        const appointmentDate = (startDate
+                            .hours(currentTime.hours())
+                            .minutes(currentTime.minutes()));
+                        const appointment = appointmentData.find(d => d.appointmentStartDate === appointmentDate._d.toISOString() && d.therapistID === therapist && d.isCanceled !== "true");
+                        if (appointment && cnt === 0) {
+                            currentTime.add(1, 'hours');
+                            cnt++
+                        }
+                        else {
+                            timeIntervals.push(currentTime.format('h:mm A'));
+                            currentTime.add(30, 'minutes');
+                        }
                     }
-                    else {
-                        timeIntervals.push(currentTime.format('h:mm A'));
-                        currentTime.add(30, 'minutes');
-                    }
-                }
 
-                return (
-                    <span>
-                        {timeIntervals.map((time, key) => {
-                            return (
-                                <button
-                                    className="buttonStyling"
-                                    key={key}
-                                    onClick={() => handleIntervalClick(time)}
-                                    style={{ background: selectedIntervals.includes(time) ? 'teal' : 'white'}}
-                                >
-                                    {time}
-                                </button>
-                            );
-                        })}
-                    </span>
-                );
-            })}</div>
+                    return (
+                        <span>
+
+
+                                {timeIntervals.map((time, key) => {
+
+                                    return (
+
+                                        <button
+
+                                            className="button2"
+
+                                            key={key}
+
+                                            onClick={() => handleIntervalClick(time)}
+
+                                            style={{
+
+                                                background: selectedIntervals.includes(time)
+
+                                                    ? "teal"
+
+                                                    : "white",
+
+                                            }}
+
+                                        >
+
+                                            {time}
+
+                                        </button>
+
+                                    );
+
+                                })}
+
+
+                        </span>
+                    );
+                })}</div>
 
 
 
         {/* Change state Input to a dropdown of every state with search feature?? */}
         <span className="centerCalendar">
-            {selectedIntervals?.length!==0 && therapistName && <ConfirmAppointmentModal />}
+            {selectedIntervals?.length !== 0 && therapistName && <ConfirmAppointmentModal />}
         </span>
     </div>
 }

@@ -1,6 +1,7 @@
 import { React, useState} from 'react';
 import { validatePassword } from '../../functions/security/validatePassword';
 import '../classes.css';
+import RRA_Logo from '../../images/RRA_Logo.png'
 var bcrypt = require('bcryptjs');
 
 const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, therapistData }) => {
@@ -25,11 +26,16 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
     // set what user is Logged In to pull the respective credentials & appointment data
     // global state with logged in Users Data so we can match the userID to other 'data'
   };
-
+  // margin-top: 20px;
+  // display: block;
+  // margin-left: auto;
+  // margin-right: auto;
+  // width: 150px;
   return (
     <div>
       <form className="form">
-        <input id="emailInput" onChange={e => setUserEmail(e.target.value)} type="text" placeholder="Email" />
+      <img src={RRA_Logo} alt='RRA Logo Icon' style={{marginTop: "-10%", display:"block", marginLeft:"auto", marginRight:"auto", width:"150px"}}/>
+        <input id="emailInput"  onChange={e => setUserEmail(e.target.value)} type="text" placeholder="Email" />
         <input onChange={e => validatePassword(e.target.value) ? setPassWordOne(e.target.value) : (() => e.className = "passwordInput")} type="password" placeholder="Password" />
         <button type="submit" onClick={() => { validatePassword(passWordOne) && handleLogin() }}>Login</button>
         <button onClick={() => registeredChanger(false)}>Don't Have an Account? Sign Up</button>

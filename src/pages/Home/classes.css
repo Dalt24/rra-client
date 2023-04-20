@@ -4,15 +4,6 @@ ul, li{
 
 
 
-.container {
-  font-size: 14px;
-  text-align: center;
-}
-
-.container h1 {
-  font-size: 40px;
-  font-weight: 200;
-}
 
 form {
   padding: 240px 0;
@@ -64,10 +55,18 @@ form button {
 
 .handleCancel {
   padding: 2px;
-  background-color: #439493;
+  background-color: #56a0a1;
   color: #fff;
   border-color: transparent;
   border-radius: 5%;
+}
+
+.user {
+  border-radius: 1%;
+  padding-top: 10px;
+  margin: 9px;
+  background-color: #439493;
+  border-color: black;
 }
 
   /* padding:0.6em 2em;
@@ -79,3 +78,16 @@ form button {
   cursor:pointer;
   margin:1em; */
   /* background: #50a3a2; */
+
+  .head {
+    background-color: #439493;
+    margin: 20px;
+    text-align: center;
+    border-radius: 2%;
+  }
+
+  .header {
+    padding-top: 50px;
+    position: relative;
+    bottom: -22px;
+  }

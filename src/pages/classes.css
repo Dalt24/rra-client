@@ -1,4 +1,15 @@
+.errorInput {
+  border: 2px solid red;
+  border-radius: 4px;
+}
 
+
+
+.errorInput:focus {
+  outline: none;
+  border-color: red;
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
+}
 
 .container {
   font-size: 14px;
@@ -64,4 +75,9 @@ form button {
 
 .password{
   margin: 5px;
+}
+
+
+::placeholder {
+  color: white;
 }
