@@ -7,7 +7,7 @@ var bcrypt = require('bcryptjs');
 const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, therapistData }) => {
   const [userEmail, setUserEmail] = useState("");
   const [passWordOne, setPassWordOne] = useState("");
-  const handleLogin = () => {
+  const handleLogin = (e) => {
     // axios logic, check if userEmail is in database && verify password by checking the hash against the input
     const currUser = data.find((user) => user.emailAddress === userEmail)
     const currUserTherapist = therapistData.find((user) => user.emailAddress === userEmail)
@@ -21,6 +21,7 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
     }// Need a failed to login modal / temp screen
     else {
       loggedInChanger(false)
+      alert('fail')
     }
     // set what user is Logged In to pull the respective credentials & appointment data
     // global state with logged in Users Data so we can match the userID to other 'data'
@@ -37,8 +38,8 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
         <span style={{backgroundColor:"#50a3a2"}}>
         <input id="emailInput"  onChange={e => setUserEmail(e.target.value)} type="text" placeholder="Email" />
         <input onChange={e => validatePassword(e.target.value) ? setPassWordOne(e.target.value) : (() => e.className = "passwordInput")} type="password" placeholder="Password" />
-        <button type="submit" onClick={() => { validatePassword(passWordOne) && handleLogin() }}>Login</button>
-          <button onClick={() => registeredChanger(false)}>Don't Have an Account? Sign Up</button>
+        <button type="submit" onClick={e => { validatePassword(passWordOne) && handleLogin()}}>Login</button>
+        <button onClick={() => registeredChanger(false)}>Don't Have an Account? Sign Up</button>
           </span>
       </form>
     </div >

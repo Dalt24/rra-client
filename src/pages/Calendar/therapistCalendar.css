@@ -1,3 +1,31 @@
 .theraCal {
     text-align: center;
 }
+
+.button2:hover {
+  background-color: #439A97;
+  outline-color: gray;
+  border-color: #155a59;
+}
+
+.button2 {
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  width: 100px;
+  border-radius: 15px;
+  font-family: "Source Sans Pro", sans-serif;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: #50a3a2;
+  font-weight: 300;
+  margin: 5px;
+}
+
+.time-slots-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  max-width: 600px;
+}

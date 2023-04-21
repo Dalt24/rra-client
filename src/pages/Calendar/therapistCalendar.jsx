@@ -6,13 +6,21 @@ import './therapistCalendar.css';
 
 const TherapistCalendar = (props) => {
 
+
     const therapistInfo = (props.therapistData.find((data) => data.therapistID === props.currentUser.therapistID))
     console.log(therapistInfo)
     const [availability, setAvailability] = useState(JSON.parse(therapistInfo.availability));
     console.log(availability)
     const [selectedDay, setSelectedDay] = useState("Monday");
+    const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
 
-    const timeSlots = [        '08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM',        '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',        '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM',        '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM',        '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM',    ];
+    const timeSlots = [
+        '08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM',
+        '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+        '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM',
+        '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM',
+        '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM',
+    ];
 
     function handleSubmit() {
         const body = {
@@ -26,20 +34,33 @@ const TherapistCalendar = (props) => {
         }
         axios.put(`${getApiBaseUrl()}/api/Therapist/${props.currentUser.therapistID}`, body)
     }
-
     const handleTimeSlotSelection = (index) => {
-        const dayAvailability = availability[selectedDay] || [];
+        const isSelected = selectedTimeSlots.includes(index);
+        let newSelectedTimeSlots = [];
+        if (!isSelected) {
+            newSelectedTimeSlots = [...selectedTimeSlots, index];
+        } else {
+            newSelectedTimeSlots = selectedTimeSlots.filter((i) => i !== index);
+        }
         const startTime = timeSlots[index];
         const endTime = moment(startTime, 'h:mm A').add(30, 'minutes').format('h:mm A');
+        const dayAvailability = availability[selectedDay] || [];
         const newAvailability = {
             ...availability,
-            [selectedDay]: [
-                ...dayAvailability,
-                { start: startTime, end: endTime },
-            ],
+            [selectedDay]: newSelectedTimeSlots.map((i) => ({
+                start: timeSlots[i],
+                end: moment(timeSlots[i], 'h:mm A').add(30, 'minutes').format('h:mm A'),
+            })),
         };
         setAvailability(newAvailability);
+        setSelectedTimeSlots(newSelectedTimeSlots);
     };
+
+
+
+
+
+
 
     const handleRemoveTimeSlot = (index) => {
         const dayAvailability = availability[selectedDay] || [];
@@ -70,32 +91,49 @@ const TherapistCalendar = (props) => {
             </div>
 
             <div>
-                <h3>{selectedDay}</h3>
+                <h3>Available Time Slots:</h3>
                 <div>
-                    {availability[selectedDay]?.length > 0 ? (
-                        availability[selectedDay].map(({ start, end }, i) => (
-                            <div key={i}>
-                                {start} - {end}
-                                <button onClick={() => handleRemoveTimeSlot(i)}>Remove</button>
-                            </div>
-                        ))
-                    ) : (
-                        <div>No availability set.</div>
-                    )}
+                    {timeSlots.map((slot, index) => {
+                        const dayAvailability = availability[selectedDay] || [];
+                        const isSelected = selectedTimeSlots.includes(index);
+                        const isAvailable = !dayAvailability.some(
+                            (timeSlot) => timeSlot.start === slot
+                        );
+                        return (
+                            <button
+                                key={index}
+                                className="button2"
+
+                                disabled={!isAvailable && isSelected}
+                                onClick={() => handleTimeSlotSelection(index)}
+                            >
+                                {slot}
+                            </button>
+                        );
+                    })}
                 </div>
-                <div>
-                    <select value="" onChange={(e) => handleTimeSlotSelection(e.target.value)}>
-                        <option value="">Select a time slot...</option>
-                        {timeSlots.map((time, index) => (
-                        <option key={index} value={index}>
-                            {time}
-                        </option>
+            </div>
+
+            <div>
+                <h3>Selected Time Slots:</h3>
+                <div className='time-slots-container'>
+                    {availability[selectedDay]?.map((timeSlot, index) => (
+                        <button
+                            key={index}
+                            className="button2"
+                            onClick={() => handleRemoveTimeSlot(index)}
+                        >
+                            {timeSlot.start} - {timeSlot.end}
+                        </button>
                     ))}
-                </select>
-                <button onClick={handleSubmit}>Save Changes</button>
+                </div>
+            </div>
+
+            <div className='submitBtn'>
+                <button onClick={handleSubmit}>Save</button>
             </div>
         </div>
-    </div>
-);
-                        }
+    );
+};
+
 export default TherapistCalendar;
