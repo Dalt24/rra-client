@@ -60,7 +60,7 @@ const Register = ({ registeredChanger, data }) => {
 
   return (
     <div>
-      <form className="form">
+      <form className="form  login">
         <input type="text" id="firstNameInput" onChange={e => setFirstName(e.target.value)} placeholder="First Name" />
         <input type="text" id="lastNameInput" onChange={e => setLastName(e.target.value)} placeholder="Last Name" />
         <input type="text" id="phoneNumberInput" onChange={e => setPhoneNumber(e.target.value)} placeholder="Phone Number xxx-xxx-xxxx" />

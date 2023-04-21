@@ -29,7 +29,7 @@ const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData
 
             </div>
             <div className="row">
-                <div className="col-md user">
+                <div className="col-md user" style={{minHeight:"100px"}}>
 
 
                     {/* static user info from currentUser prop */}

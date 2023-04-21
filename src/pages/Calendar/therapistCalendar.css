@@ -22,10 +22,58 @@
 }
 
 .time-slots-container {
+    background-color: #439A97;
+    margin-left: 34%;
+    text-align: center;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex;
   align-items: center;
   gap: 10px;
   max-width: 600px;
+  border-radius: 9px;
+  padding: 5px;
 }
+
+.submitBtn {
+    background-color: #439A97;
+  width: 100px;
+  border-radius: 15px;
+  font-family: "Source Sans Pro", sans-serif;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 300;
+  margin: 5px;
+  color: white;
+  outline-color: #155a59;
+  border-color:#155a59;
+}
+
+
+
+.submitContainer {
+    margin-top: 25px;
+    margin-left: 46.5%;
+}
+
+.selected {
+    margin-top: 30px;
+}
+
+
+.choice {
+  margin-top: 8px;
+    background-color: #439A97;
+    margin-left: 34%;
+    text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 600px;
+  border-radius: 9px;
+  padding: 5px;
+}
+

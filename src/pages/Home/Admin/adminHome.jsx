@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Create from "./createAdmin.jsx"
 import Edit from './editAdmin.jsx';
 
-
 const AdminHome = ({data, therapistData, currentUser }) => {
     const navigate = useNavigate();
     return <div className='admin-container'>

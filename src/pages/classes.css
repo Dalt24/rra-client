@@ -59,6 +59,10 @@ form button {
   background-color: rgb(201, 30, 30);
 }
 
+.fix {
+  fill: black;
+}
+
 .passwordInput {
   display: none;
 }

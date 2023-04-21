@@ -24,13 +24,13 @@
 }
 
 .centerTimeChoices {
-    /* style={{paddingLeft: "40%", maxWidth:"30%"}}
+  /* style={{paddingLeft: "40%", maxWidth:"30%"}}
      */
-     margin-top: 50px;
-     max-width: 30%;
-     padding-left: 46%;
-    margin-bottom: 50px;
-    }
+  margin-top: 50px;
+  max-width: 30%;
+  padding-left: 46%;
+  margin-bottom: 50px;
+}
 
 .modalHeader {
   justify-content: center;
@@ -69,4 +69,48 @@
   color: #50a3a2;
   font-weight: 300;
   margin: 5px;
+}
+
+.button2 {
+
+  border: 1px solid rgba(252, 252, 252, 0.4);
+
+  width: 100px;
+
+  border-radius: 15px;
+
+  font-family: "Source Sans Pro", sans-serif;
+
+  display: block;
+
+  text-align: center;
+
+  font-size: 18px;
+
+  color: #50a3a2;
+
+  font-weight: 300;
+
+  margin: 5px;
+
+}
+
+.arg {
+  background-color: black;
+}
+
+
+
+
+.time-slots-container {
+    margin-left: 34%;
+    text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 600px;
+  margin-bottom: 10px;
+
 }

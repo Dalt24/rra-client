@@ -8,18 +8,16 @@ const TherapistCalendar = (props) => {
 
 
     const therapistInfo = (props.therapistData.find((data) => data.therapistID === props.currentUser.therapistID))
-    console.log(therapistInfo)
     const [availability, setAvailability] = useState(JSON.parse(therapistInfo.availability));
-    console.log(availability)
     const [selectedDay, setSelectedDay] = useState("Monday");
     const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
 
     const timeSlots = [
-        '08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM',
+        '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM',
         '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
-        '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM',
-        '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM',
-        '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM',
+        '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM',
+        '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM',
+        '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM',
     ];
 
     function handleSubmit() {
@@ -42,9 +40,6 @@ const TherapistCalendar = (props) => {
         } else {
             newSelectedTimeSlots = selectedTimeSlots.filter((i) => i !== index);
         }
-        const startTime = timeSlots[index];
-        const endTime = moment(startTime, 'h:mm A').add(30, 'minutes').format('h:mm A');
-        const dayAvailability = availability[selectedDay] || [];
         const newAvailability = {
             ...availability,
             [selectedDay]: newSelectedTimeSlots.map((i) => ({
@@ -55,11 +50,6 @@ const TherapistCalendar = (props) => {
         setAvailability(newAvailability);
         setSelectedTimeSlots(newSelectedTimeSlots);
     };
-
-
-
-
-
 
 
     const handleRemoveTimeSlot = (index) => {
@@ -74,11 +64,12 @@ const TherapistCalendar = (props) => {
     return (
         <div className='theraCal'>
             <div>
-                <h3>Choose a day:</h3>
-                <div>
-                    {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map(day => (
+                <h3  className='time-slots-container' style={{marginTop:"10px"}}>Choose a day</h3>
+                <span className='choice'>
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map(day => (
                         <label key={day}>
                             <input
+                                className='choice'
                                 type="radio"
                                 value={day}
                                 checked={selectedDay === day}
@@ -87,12 +78,12 @@ const TherapistCalendar = (props) => {
                             {day}
                         </label>
                     ))}
-                </div>
+                        </span>
             </div>
 
-            <div>
-                <h3>Available Time Slots:</h3>
-                <div>
+            <div className='selected'>
+                <h3 className='time-slots-container'>Available Time Slots</h3>
+                <div  className='time-slots-container'>
                     {timeSlots.map((slot, index) => {
                         const dayAvailability = availability[selectedDay] || [];
                         const isSelected = selectedTimeSlots.includes(index);
@@ -101,6 +92,7 @@ const TherapistCalendar = (props) => {
                         );
                         return (
                             <button
+                                
                                 key={index}
                                 className="button2"
 
@@ -114,8 +106,8 @@ const TherapistCalendar = (props) => {
                 </div>
             </div>
 
-            <div>
-                <h3>Selected Time Slots:</h3>
+            <div className='selected'>
+                <h3 className='time-slots-container'>Selected Time Slots</h3>
                 <div className='time-slots-container'>
                     {availability[selectedDay]?.map((timeSlot, index) => (
                         <button
@@ -129,8 +121,8 @@ const TherapistCalendar = (props) => {
                 </div>
             </div>
 
-            <div className='submitBtn'>
-                <button onClick={handleSubmit}>Save</button>
+            <div className='submitContainer'>
+                <button  className='submitBtn' onClick={handleSubmit}>Save</button>
             </div>
         </div>
     );

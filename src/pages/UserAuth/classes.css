@@ -7,10 +7,14 @@
 }
 
 .login {
+  
   background-color: #439A97;
   text-align: center;
-  
+    height: 100rem;
+    width: 100%;
 }
+
+
 
 .change {
   padding: 5px;

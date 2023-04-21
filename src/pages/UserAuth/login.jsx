@@ -33,6 +33,7 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
   // width: 150px;
   return (
     <div>
+
       <form className="form login">
         <img src={RRA_Logo} alt='RRA Logo Icon' style={{ marginTop: "-10%", display: "block", marginLeft: "auto", marginRight: "auto", width: "150px" }} />
         <span style={{backgroundColor:"#50a3a2"}}>

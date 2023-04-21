@@ -47,8 +47,8 @@ const Edit = ({ therapistData, userData, currentUser }) => {
       </Button>
 
       <Modal show={show} onHide={handleClose} className="modalFont">
-        <Modal.Header style={{ padding: 0 }}>
-          <Modal.Title>Delete Therapist/Admin</Modal.Title>
+        <Modal.Header className="modalHeader">
+          <Modal.Title><div>Delete Therapist/Admin</div></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form className="formStyling">
@@ -88,16 +88,18 @@ const Edit = ({ therapistData, userData, currentUser }) => {
                   ))}
               </Form.Control>
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+                    <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}  className="button">
             Close
           </Button>
-          <Button variant="danger" onClick={handleDelete}>
+          <Button variant="danger" onClick={handleDelete}  className="button">
             Delete
           </Button>
         </Modal.Footer>
+          </Form>
+          
+        </Modal.Body>
+
       </Modal>
     </>
   );

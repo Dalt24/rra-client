@@ -59,8 +59,8 @@ const UserCalendar = (props) => {
 
             axios.post(`${getApiBaseUrl()}/api/Appointment`, body).then(
                 handleClose()
-                )
-                navigate('/calendar', { replace: true })
+            )
+            navigate('/calendar', { replace: true })
         };
 
         return (
@@ -211,9 +211,9 @@ const UserCalendar = (props) => {
 
     return <div>
 
-        <span className="centerCalendar"><Calendar onChange={onChange} value={date} calendarType="US" /></span>
+        <span style={{marginTop:"10px"}} className="centerCalendar"><Calendar onChange={onChange} value={date} calendarType="US" /></span>
 
-        <span className="centerCalendar">
+        <span className="centerCalendar" style={{marginTop:"10px"}}>
             <select
                 onChange={(e) => {
                     const therapistID = e.target.value;
@@ -233,7 +233,7 @@ const UserCalendar = (props) => {
         </span>
 
         {/* <p>Appointments Available on {moment(date).format('MMMM Do YYYY')}</p> */}
-        <div className="centerTimeChoices">
+        <div className="time-slots-container" style={{marginTop:"10px"}}>
             {a !== undefined &&
                 a[day]?.map((c) => {
                     const startTime = moment(c.start, 'h:mm A');
@@ -257,45 +257,25 @@ const UserCalendar = (props) => {
                             currentTime.add(30, 'minutes');
                         }
                     }
-
                     return (
-                        <span>
-
-
-                                {timeIntervals.map((time, key) => {
-
-                                    return (
-
-                                        <button
-
-                                            className="button2"
-
-                                            key={key}
-
-                                            onClick={() => handleIntervalClick(time)}
-
-                                            style={{
-
-                                                background: selectedIntervals.includes(time)
-
-                                                    ? "teal"
-
-                                                    : "white",
-
-                                            }}
-
-                                        >
-
-                                            {time}
-
-                                        </button>
-
-                                    );
-
-                                })}
-
-
-                        </span>
+                      <span>
+                        {timeIntervals.map((time, key) => {
+                          return (
+                            <button
+                              className="button2"
+                              key={key}
+                              onClick={() => handleIntervalClick(time)}
+                              style={{
+                                background: selectedIntervals.includes(time)
+                                  ? "teal"
+                                  : "white",
+                              }}
+                            >
+                              {time}
+                            </button>
+                          );
+                        })}
+                      </span>
                     );
                 })}</div>
 

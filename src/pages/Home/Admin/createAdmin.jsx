@@ -2,6 +2,7 @@ import { getApiBaseUrl } from "../../../functions/api/getApi"
 import axios from "axios"
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import './classes.css';
 
 const Create = () => {
     const [show, setShow] = useState(false);
@@ -65,8 +66,8 @@ const Create = () => {
             </Button>
 
             <Modal show={show} onHide={handleClose} className="modalFont">
-                <Modal.Header style={{ padding: 0 }}>
-                    <Modal.Title>Create Therapist/Admin</Modal.Title>
+                <Modal.Header  className="modalHeader">
+                    <Modal.Title><div>Create Therapist/Admin</div></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form className="formStyling">
@@ -121,19 +122,20 @@ const Create = () => {
                             />
                         </Form.Group>
                         <Form.Group controlId="password">
-                            <Form.Label>The Temporary Password is "TempPassword123" Inform the Therapist or Admin to Change this on Login</Form.Label>
+                            <Form.Label>Temp Password: "TempPassword123" </Form.Label>
+                            <Form.Label>Inform the new user to change this on Login </Form.Label>
                         </Form.Group>
-
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose} className="button">
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleSubmit} className="button">
+                                Create
+                            </Button>
+                        </Modal.Footer>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
-                        Create
-                    </Button>
-                </Modal.Footer>
+
             </Modal>
         </>
     );

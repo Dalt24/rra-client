@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import './classes.css';
-
+import RRA_Logo from '../../../images/RRA_Logo.png'
 
 const Reports = ({ appointmentData }) => {
 
@@ -92,6 +92,8 @@ const Reports = ({ appointmentData }) => {
 
     return (
         <div className="reports-container">
+        <img src={RRA_Logo} alt='RRA Logo Icon' style={{ marginTop: "-10%", display: "block", marginLeft: "auto", marginRight: "auto", width: "150px" }} />
+
             <h1>Reports</h1>
             <div className="reports-options">
                 <div className="report-type">
