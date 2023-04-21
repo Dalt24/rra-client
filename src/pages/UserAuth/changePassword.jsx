@@ -4,6 +4,8 @@ import axios from 'axios';
 import { getApiBaseUrl } from '../../functions/api/getApi';
 import CustomAlertMessage from '../../components/Misc/successPopup';
 import '../classes.css';
+import RRA_Logo from '../../images/RRA_Logo.png'
+
 // import { validatePassword } from '../../functions/security/validatePassword';
 
 const ChangePassword = ({ currentUser }) => {
@@ -14,31 +16,30 @@ const ChangePassword = ({ currentUser }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (currentUser.isAdmin === "true") {
-      console.log(bcrypt.compareSync(oldPassword, currentUser.userPassword))
-      const updatedUser = { ...currentUser, userPassword: bcrypt.hashSync(newPassword, 10) };
-      axios.put(`${getApiBaseUrl()}/api/User/${currentUser.userID}`, updatedUser).then(
-        setShowAlert(true)
-      )
-    }
-    else if (currentUser.isTherapist === "true") {
-      console.log(bcrypt.compareSync(oldPassword, currentUser.therapistPassword))
-      const updatedUser = { ...currentUser, therapistPassword: bcrypt.hashSync(newPassword, 10) };
-      axios.put(`${getApiBaseUrl()}/api/Therapist/${currentUser.therapistID}`, updatedUser).then(
-        setShowAlert(true)
-
-      )
-      console.log(currentUser)
-    } else if (currentUser.isTherapist === "false") {
-      console.log(bcrypt.compareSync(oldPassword, currentUser.userPassword))
-      const updatedUser = { ...currentUser, userPassword: bcrypt.hashSync(newPassword, 10) };
-      axios.put(`${getApiBaseUrl()}/api/User/${currentUser.userID}`, updatedUser).then(
-        setShowAlert(true)
-      )
-
-    }
+    if (bcrypt.hashSync(newPassword, 10) === currentUser.userPassword) {
+      
+      if (currentUser.isAdmin === "true") {
+        const updatedUser = { ...currentUser, userPassword: bcrypt.hashSync(newPassword, 10) };
+        axios.put(`${getApiBaseUrl()}/api/User/${currentUser.userID}`, updatedUser).then(
+          setShowAlert(true)
+          )
+        }
+        else if (currentUser.isTherapist === "true") {
+          const updatedUser = { ...currentUser, therapistPassword: bcrypt.hashSync(newPassword, 10) };
+          axios.put(`${getApiBaseUrl()}/api/Therapist/${currentUser.therapistID}`, updatedUser).then(
+            setShowAlert(true)
+            
+            )
+          } else if (currentUser.isTherapist === "false") {
+            const updatedUser = { ...currentUser, userPassword: bcrypt.hashSync(newPassword, 10) };
+            axios.put(`${getApiBaseUrl()}/api/User/${currentUser.userID}`, updatedUser).then(
+              setShowAlert(true)
+              )
+              
+            }
+          }
     else {
+      alert('Old Password is Incorrect!')
       setShowFailAlert(true)
     }
   };
@@ -64,7 +65,9 @@ const ChangePassword = ({ currentUser }) => {
           onClose={handleAlertClose}
         />
       )}
-      <form onSubmit={handleSubmit}>
+      <span>
+        <form onSubmit={handleSubmit} className='login'>
+        <img src={RRA_Logo} alt='RRA Logo Icon' style={{ marginTop: "-10%", display: "block", marginLeft: "auto", marginRight: "auto", width: "150px" }} />
         <label>
           Old Password:
           <input className='password' type="password" value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
@@ -74,7 +77,8 @@ const ChangePassword = ({ currentUser }) => {
           <input className='password' type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} />
         </label>
         <button type="submit">Change Password</button>
-      </form>
+        </form>
+        </span>
     </div>
   );
 };

@@ -46,12 +46,12 @@ const handleCancel = (appointmentID) => {
     return (<div>
 
         <div className="container">
-            <h1 className="head">
+            <div className="head">
                 <span className="header">{"Welcome " + currentUser.firstName + " " + currentUser.lastName}</span>
                 <br />
                 <br />
 
-            </h1>
+            </div>
             <div className="row">
                 <div className="col-md user">
                     <h3>User Information</h3>

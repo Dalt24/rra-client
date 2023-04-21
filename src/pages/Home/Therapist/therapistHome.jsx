@@ -22,14 +22,14 @@ const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData
     return (<div>
 
         <div className="container">
-            <h1>
-                {"Welcome " + currentUser.firstName + " " + currentUser.lastName}
+            <div className="head">
+                <span className="header">{"Welcome " + currentUser.firstName + " " + currentUser.lastName}</span>
                 <br />
                 <br />
 
-            </h1>
+            </div>
             <div className="row">
-                <div className="col-md">
+                <div className="col-md user">
 
 
                     {/* static user info from currentUser prop */}
@@ -38,7 +38,7 @@ const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData
                     }}><h3>Click to Update Schedule</h3></button>
 
                 </div>
-                <div className="col-md">
+                <div className="col-md user">
                     <h3>Upcoming Appointments</h3>
                     <ul>
                         {futureAppointmentData.filter((appointment) => appointment.isCanceled !== "true").sort((a, b) => moment(a.appointmentStartDate) - moment(b.appointmentStartDate)).map((appointment) => {
@@ -68,7 +68,7 @@ const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData
                     </ul>
                     {/* map through cards showing all appointments after today */}
                 </div>
-                <div className="col-md">
+                <div className="col-md user">
                     <h3>Past Appointments</h3>
                     {/* map through cards showing all appointments before today */}
                     <ul>

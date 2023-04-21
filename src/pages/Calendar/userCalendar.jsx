@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Calendar from 'react-calendar'
 import { getApiBaseUrl } from "../../functions/api/getApi";
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from "react-bootstrap";
@@ -12,7 +12,7 @@ import './userCalendar.css';
 const UserCalendar = (props) => {
     const typesOfTherapy = ['Stretching', 'Conditioning', 'Cryotherapy', 'Strengthening', 'Surgical rehabilitation'];
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [date, setDate] = useState(new Date().toISOString());
     const [day, setDay] = useState(moment().format('dddd'));
     const [a, setA] = useState();
@@ -58,10 +58,9 @@ const UserCalendar = (props) => {
             }
 
             axios.post(`${getApiBaseUrl()}/api/Appointment`, body).then(
-                // navigate('/', { replace: true })
-                console.log('finished post')
-            )
-            handleClose()
+                handleClose()
+                )
+                navigate('/calendar', { replace: true })
         };
 
         return (

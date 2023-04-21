@@ -42,7 +42,7 @@ const Help = ({currentUser}) => {
                 <li>To cancel an appointment simply click the cancel button next to the appointment that you would like to cancel</li>
             </ul>
             <h2>Contact Us:</h2>
-            <h4>Support@rratuscaloosa.com</h4>
+            <a href='mailto:Support@rratuscaloosa.com'><h4>Support@rratuscaloosa.com</h4></a>
             <h4>205-867-5309</h4>
 
         </div>)

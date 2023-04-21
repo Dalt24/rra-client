@@ -20,7 +20,7 @@ const Profile = ({ currentUser }) => {
         <div>
             <h1 className='moveDown'>Profile Page</h1>
 
-            <div className='centerText'>
+            <div className='centerText profile'>
 
                 <table className='centerTable'>
 

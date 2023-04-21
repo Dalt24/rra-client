@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { getApiBaseUrl } from '../../functions/api/getApi';
+import './therapistCalendar.css';
 
 const TherapistCalendar = (props) => {
 
@@ -50,7 +51,7 @@ const TherapistCalendar = (props) => {
     };
 
     return (
-        <>
+        <div className='theraCal'>
             <div>
                 <h3>Choose a day:</h3>
                 <div>
@@ -94,7 +95,7 @@ const TherapistCalendar = (props) => {
                 <button onClick={handleSubmit}>Save Changes</button>
             </div>
         </div>
-    </>
+    </div>
 );
                         }
 export default TherapistCalendar;

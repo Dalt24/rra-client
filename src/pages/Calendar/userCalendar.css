@@ -48,6 +48,12 @@
 
 .button:hover {
   background-color: #439A97;
+  outline-color: rgb(24, 22, 22);
+  border-color: #155a59;
+}
+
+.button2:hover {
+  background-color: #439A97;
   outline-color: gray;
   border-color: #155a59;
 }

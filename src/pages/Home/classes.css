@@ -55,7 +55,7 @@ form button {
 
 .handleCancel {
   padding: 2px;
-  background-color: #56a0a1;
+  background-color: #3ecab3;
   color: #fff;
   border-color: transparent;
   border-radius: 5%;
@@ -66,7 +66,6 @@ form button {
   padding-top: 10px;
   margin: 9px;
   background-color: #439493;
-  border-color: black;
 }
 
   /* padding:0.6em 2em;
@@ -81,13 +80,21 @@ form button {
 
   .head {
     background-color: #439493;
-    margin: 20px;
+    align-self: center;
     text-align: center;
     border-radius: 2%;
+    max-width: 25%;
+    margin: 0 auto;
+    margin-top: 15px;
   }
 
   .header {
     padding-top: 50px;
     position: relative;
-    bottom: -22px;
+    bottom: -12px;
+    font-size: 25px;
+  }
+
+  .container {
+    align-items: center;
   }
