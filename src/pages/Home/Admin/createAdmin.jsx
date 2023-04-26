@@ -27,7 +27,7 @@ const Create = () => {
                 lastName: lastName,
                 availability: `{"Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}`,
                 emailAddress: emailAddress,
-                therapistPassword: bcrypt.hashSync("TempPassword123!!", bcrypt.genSaltSync()),
+                therapistPassword: bcrypt.hashSync("TempPassword123", bcrypt.genSaltSync()),
                 isTherapist: "true",
                 isAdmin: "false",
             };
@@ -44,7 +44,7 @@ const Create = () => {
                 lastName: lastName,
                 emailAddress: emailAddress,
                 phoneNumber: phoneNumber,
-                userPassword: bcrypt.hashSync("AdminPassword1!", bcrypt.genSaltSync()),
+                userPassword: bcrypt.hashSync("TempPassword123", bcrypt.genSaltSync()),
                 isAdmin: "true",
                 isTherapist: "false",
             };
