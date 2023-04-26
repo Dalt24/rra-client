@@ -35,6 +35,7 @@ const Register = ({ registeredChanger, data }) => {
     const isDuplicateEmail = data.find((user) => user.emailAddress === userEmail);
 
     const user = {
+      firstName: firstName,
       lastName: lastName,
       emailAddress: userEmail,
       phoneNumber: phoneNumber,
