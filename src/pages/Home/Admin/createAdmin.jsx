@@ -14,7 +14,6 @@ const Create = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    var bcrypt = require('bcryptjs');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,7 +26,7 @@ const Create = () => {
                 lastName: lastName,
                 availability: `{"Monday":[],"Tuesday":[],"Wednesday":[],"Thursday":[],"Friday":[]}`,
                 emailAddress: emailAddress,
-                therapistPassword: bcrypt.hashSync("TempPassword123", bcrypt.genSaltSync()),
+                therapistPassword:'$2a$10$BV9PhgW1BnEBsgWDlOMT0OMeJ7SrQSRLmKsjTmEEBSzDj9tJ58sGC',
                 isTherapist: "true",
                 isAdmin: "false",
             };
@@ -44,7 +43,7 @@ const Create = () => {
                 lastName: lastName,
                 emailAddress: emailAddress,
                 phoneNumber: phoneNumber,
-                userPassword: bcrypt.hashSync("TempPassword123", bcrypt.genSaltSync()),
+                userPassword: '$2a$10$BV9PhgW1BnEBsgWDlOMT0OMeJ7SrQSRLmKsjTmEEBSzDj9tJ58sGC',
                 isAdmin: "true",
                 isTherapist: "false",
             };
@@ -122,7 +121,7 @@ const Create = () => {
                             />
                         </Form.Group>
                         <Form.Group controlId="password">
-                            <Form.Label>Temp Password: "TempPassword123" </Form.Label>
+                            <Form.Label>Temp Password: "TestPass1!" </Form.Label>
                             <Form.Label>Inform the new user to change this on Login </Form.Label>
                         </Form.Group>
                         <Modal.Footer>
