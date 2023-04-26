@@ -21,16 +21,10 @@ const Login = ({ loggedInChanger, registeredChanger, setCurrentUser, data, thera
     }// Need a failed to login modal / temp screen
     else {
       loggedInChanger(false)
-      alert('fail')
+      alert('Incorrect Email Or Password, Try Again!')
     }
-    // set what user is Logged In to pull the respective credentials & appointment data
-    // global state with logged in Users Data so we can match the userID to other 'data'
   };
-  // margin-top: 20px;
-  // display: block;
-  // margin-left: auto;
-  // margin-right: auto;
-  // width: 150px;
+
   return (
     <div>
 

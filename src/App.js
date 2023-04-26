@@ -105,10 +105,3 @@ function App() {
 }
 
 export default App
-
-
-
-
-        // <button type="submit" onClick={() => {
-        //     navigate('/reports', { replace: true })
-        // }}><h3>Reports</h3></button>
