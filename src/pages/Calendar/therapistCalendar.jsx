@@ -73,7 +73,7 @@ const TherapistCalendar = (props) => {
                                 type="radio"
                                 value={day}
                                 checked={selectedDay === day}
-                                onChange={() => setSelectedDay(day)}
+                                onChange={() =>     setAvailability(JSON.parse(therapistInfo.availability)) + setSelectedDay(day) + setSelectedTimeSlots([])}
                             />
                             {day}
                         </label>
@@ -107,7 +107,7 @@ const TherapistCalendar = (props) => {
             </div>
 
             <div className='selected'>
-                <h3 className='time-slots-container'>Selected Time Slots</h3>
+                <h3 className='time-slots-container'>Selected Time Slots: Click To Remove</h3>
                 <div className='time-slots-container'>
                     {availability[selectedDay]?.map((timeSlot, index) => (
                         <button

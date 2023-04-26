@@ -49,7 +49,6 @@ const TherapistHome = ({ currentUser, futureAppointmentData, pastAppointmentData
                                     <hr />
                                     <div className="row">
                                         <span className="col-md-10">
-                                            {/* <div>{appointment.firstName} {appointment.lastName}</div> */}
                                             <div>
                                                 {appointmentStartDate.format('dddd MMMM D, h:mm A')} -{' '}
                                                 {moment(appointment.appointmentEndDate).format('h:mm A')}
